@@ -1,27 +1,30 @@
 /* ========================================================
    Radiant Medical Physics Consulting — styles.css
-   Aesthetic: refined dark, clinical precision, soft cyan accent
+   Aesthetic: clean light theme, brand red on charcoal text,
+              Montserrat geometric sans throughout
    ======================================================== */
 
 :root {
-  /* Palette */
-  --bg:        #0d1117;
-  --bg-elev:  #131920;
-  --bg-card:  #161d26;
-  --line:     #1f2731;
-  --line-hi:  #2a3340;
+  /* Palette — sampled from the Radiant logo */
+  --bg:        #ffffff;
+  --bg-elev:   #fafafa;
+  --bg-card:   #f4f4f5;
+  --line:      #e6e6e8;
+  --line-hi:   #cdcdd1;
 
-  --text:     #e6eaf0;
-  --text-mute:#8b96a6;
-  --text-dim: #5a6473;
+  --text:      #1a1a1a;
+  --text-mute: #5a5a5a;
+  --text-dim:  #8a8a8a;
 
-  --accent:   #7ad0e8;   /* primary cyan */
-  --accent-2: #5fb3d4;   /* deeper cyan */
-  --accent-warm: #d4a574; /* sand, used sparingly */
+  --accent:        #d00008;   /* primary deep crimson */
+  --accent-2:      #a80006;   /* darker red (pressed/hover-depth) */
+  --accent-bright: #f03020;   /* bright tomato-red (active states) */
+  --accent-warm:   #f86058;   /* coral / salmon (secondary) */
+  --charcoal:      #303030;   /* logo dark spoke */
 
-  /* Type */
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  /* Type — Montserrat for display + body to match the logo wordmark */
+  --font-display: 'Montserrat', system-ui, sans-serif;
+  --font-body:    'Montserrat', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
   /* Rhythm */
@@ -38,24 +41,25 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: 17px;
+  font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Subtle texture overlay across whole page */
+/* Subtle red-tinted dot texture across the page */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(122, 208, 232, 0.04) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(208, 0, 8, 0.035) 1px, transparent 0);
   background-size: 32px 32px;
   pointer-events: none;
   z-index: 0;
 }
 
 a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-a:hover { color: #a8e1f0; }
+a:hover { color: var(--accent-bright); }
 
 /* ====================  NAV  ==================== */
 .nav {
@@ -65,8 +69,8 @@ a:hover { color: #a8e1f0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px var(--pad-x);
-  background: rgba(13, 17, 23, 0.85);
+  padding: 14px var(--pad-x);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -75,20 +79,18 @@ a:hover { color: #a8e1f0; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: -0.01em;
 }
 
-.brand-mark {
-  color: var(--accent);
-  font-size: 26px;
-  line-height: 1;
+/* Logo image — used in nav and footer in place of the prior text mark */
+.brand-logo {
+  height: 56px;
+  width: auto;
+  display: block;
 }
 
-.brand-accent { color: var(--accent); }
+.footer .brand-logo {
+  height: 64px;
+}
 
 .nav-links {
   display: flex;
@@ -99,8 +101,9 @@ a:hover { color: #a8e1f0; }
 .nav-links a {
   color: var(--text-mute);
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .nav-links a:hover { color: var(--text); }
@@ -115,7 +118,8 @@ a:hover { color: #a8e1f0; }
 
 .nav-cta:hover {
   border-color: var(--accent);
-  background: rgba(122, 208, 232, 0.08);
+  color: var(--accent) !important;
+  background: rgba(208, 0, 8, 0.06);
 }
 
 /* ====================  HERO  ==================== */
@@ -155,16 +159,17 @@ a:hover { color: #a8e1f0; }
   height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 12px var(--accent);
+  box-shadow: 0 0 12px rgba(208, 0, 8, 0.4);
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(48px, 8vw, 92px);
   line-height: 1.02;
   letter-spacing: -0.025em;
   margin-bottom: 32px;
+  color: var(--text);
   opacity: 0;
   animation: fadeUp 0.9s 0.25s forwards;
 }
@@ -172,7 +177,7 @@ a:hover { color: #a8e1f0; }
 .hero-title em {
   font-style: italic;
   color: var(--accent);
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .hero-sub {
@@ -197,8 +202,11 @@ a:hover { color: #a8e1f0; }
   display: inline-flex;
   align-items: center;
   padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   border-radius: 999px;
   transition: all 0.2s;
   border: 1px solid transparent;
@@ -206,13 +214,14 @@ a:hover { color: #a8e1f0; }
 
 .btn-primary {
   background: var(--accent);
-  color: #0d1117;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-  background: #a8e1f0;
+  background: var(--accent-2);
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(122, 208, 232, 0.25);
+  box-shadow: 0 8px 24px rgba(208, 0, 8, 0.25);
 }
 
 .btn-ghost {
@@ -225,6 +234,20 @@ a:hover { color: #a8e1f0; }
   color: var(--accent);
 }
 
+/* Hero logo: large brand mark anchored to the right of the hero */
+.hero-logo {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 560px;
+  max-width: 48%;
+  z-index: 1;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* Legacy isodose deco (kept for compatibility; recolored to brand red) */
 .hero-deco {
   position: absolute;
   right: -8%;
@@ -233,7 +256,7 @@ a:hover { color: #a8e1f0; }
   width: 720px;
   max-width: 60%;
   z-index: 1;
-  opacity: 0.6;
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -262,7 +285,7 @@ a:hover { color: #a8e1f0; }
 }
 
 .cap {
-  background: var(--bg-elev);
+  background: var(--bg);
   padding: 40px 32px;
   transition: background 0.3s;
 }
@@ -279,10 +302,11 @@ a:hover { color: #a8e1f0; }
 
 .cap h3 {
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
   margin-bottom: 12px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+  color: var(--text);
 }
 
 .cap p {
@@ -315,10 +339,11 @@ a:hover { color: #a8e1f0; }
 .approach-title {
   font-family: var(--font-display);
   font-size: clamp(32px, 5vw, 52px);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 36px;
+  color: var(--text);
 }
 
 .approach-body {
@@ -330,14 +355,14 @@ a:hover { color: #a8e1f0; }
 
 .link-arrow {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   border-bottom: 1px solid var(--accent);
   padding-bottom: 4px;
 }
 
 /* ====================  FOOTER  ==================== */
 .footer {
-  padding: 60px var(--pad-x);
+  padding: 48px var(--pad-x);
   border-top: 1px solid var(--line);
   background: var(--bg-elev);
   position: relative;
@@ -349,7 +374,7 @@ a:hover { color: #a8e1f0; }
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   flex-wrap: wrap;
   gap: 32px;
 }
@@ -370,6 +395,7 @@ a:hover { color: #a8e1f0; }
 }
 
 .footer-meta a { color: var(--text-mute); }
+.footer-meta a:hover { color: var(--accent); }
 
 /* ============== INTERIOR PAGE LAYOUT ============== */
 .page {
@@ -392,10 +418,11 @@ a:hover { color: #a8e1f0; }
 .page-title {
   font-family: var(--font-display);
   font-size: clamp(40px, 6vw, 64px);
-  font-weight: 400;
+  font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 32px;
+  color: var(--text);
 }
 
 .page-lede {
@@ -408,15 +435,16 @@ a:hover { color: #a8e1f0; }
 
 .page h2 {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 700;
   letter-spacing: -0.01em;
   margin: 56px 0 20px;
+  color: var(--text);
 }
 
 .page h3 {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
   margin: 32px 0 12px;
   color: var(--text);
 }
@@ -449,7 +477,7 @@ a:hover { color: #a8e1f0; }
 /* Service block */
 .service-block {
   border: 1px solid var(--line);
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--accent);
   padding: 32px;
   margin: 32px 0;
   background: var(--bg-elev);
@@ -463,8 +491,8 @@ a:hover { color: #a8e1f0; }
 
 .service-block h3 {
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 700;
   margin-top: 0;
   margin-bottom: 16px;
   color: var(--text);
@@ -481,13 +509,16 @@ a:hover { color: #a8e1f0; }
 .tool-card {
   background: var(--bg-elev);
   border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
   padding: 28px;
   transition: all 0.3s;
 }
 
 .tool-card:hover {
   border-color: var(--line-hi);
+  border-top-color: var(--accent-warm);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(48, 48, 48, 0.06);
 }
 
 .tool-card .tool-tag {
@@ -501,14 +532,16 @@ a:hover { color: #a8e1f0; }
 
 .tool-card h3 {
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
   margin: 0 0 10px;
+  color: var(--text);
 }
 
 .tool-card p {
   font-size: 14px;
   margin-bottom: 0;
+  color: var(--text-mute);
 }
 
 /* Contact */
@@ -546,8 +579,11 @@ a:hover { color: #a8e1f0; }
 @media (max-width: 720px) {
   .nav-links { gap: 18px; }
   .nav-links a:not(.nav-cta) { display: none; }
+  .brand-logo { height: 44px; }
+  .footer .brand-logo { height: 48px; }
   .hero { min-height: 70vh; }
-  .hero-deco { opacity: 0.3; right: -30%; }
+  .hero-logo { opacity: 0.22; right: -22%; width: 90%; }
+  .hero-deco { opacity: 0.18; right: -30%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .footer-meta { align-items: flex-start; }
   .contact-row { flex-direction: column; gap: 4px; }
