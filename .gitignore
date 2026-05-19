@@ -1,0 +1,22 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Temp / backup files
+*.tmp
+*.bak
+
+# Editor / IDE directories
+.vscode/
+.idea/
+
+# Editor swap & autosave files
+*.swp
+*.swo
+*.swn
+*~
+.*.sw[a-z]
+*.bak.*
+\#*\#
+.\#*
+*.orig
