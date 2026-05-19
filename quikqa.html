@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiant QuikQA — Evaluation Release — Radiant Medical Physics Consulting</title>
+<meta name="description" content="Download the Radiant QuikQA evaluation build. PyLinac-powered Windows QA tool for radiation oncology physics. Evaluation and testing use only — not a medical device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">◐</span>
+    <span class="brand-text">Radiant<span class="brand-accent">.</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="services.html">Services</a>
+    <a href="tools.html">Tools</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="page-eyebrow">Tools / Radiant QuikQA</div>
+  <h1 class="page-title">Radiant QuikQA <em style="font-style:italic;color:var(--accent);font-weight:300;">v1.1.0</em></h1>
+  <p class="page-lede">
+    PyLinac-powered Windows QA tool for radiation oncology physics:
+    Winston-Lutz, Picket Fence, VMAT, TG-142 MLC leaf-speed,
+    TG-51 photon &amp; electron dosimetry, DICOM anonymizer, and PDF tools.
+    Standalone single-file <code>.exe</code> &mdash; no install required.
+  </p>
+
+  <!-- Evaluation-only banner: borrows .service-block styling, warm-accent border -->
+  <div class="service-block" style="border-left-color: var(--accent-warm);">
+    <h3 style="font-family:var(--font-body); font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-warm); margin:0 0 14px;">⚠ Evaluation / testing use only — not a medical device</h3>
+    <p style="margin-bottom:0;">
+      Radiant QuikQA is an unvalidated analysis aid. It has not been
+      cleared, approved, or registered as a medical device, and must not
+      be used for clinical decision-making, treatment planning,
+      patient-care decisions, dosimetric calibration, or machine
+      release-to-service. All tolerances and outputs must be
+      independently reviewed and approved by a Qualified Medical
+      Physicist for your institution before any operational use.
+      <strong>Do not transmit PHI</strong> through this software or to
+      any third party.
+    </p>
+  </div>
+
+  <h2>Download</h2>
+  <p>
+    <a class="btn btn-primary" href="https://github.com/radiantTAB/Radiant-QuikQA-dist/releases/download/v1.1.0/RadiantQuikQA.exe">Download RadiantQuikQA.exe (v1.1.0, ~98 MB)</a>
+  </p>
+  <p style="font-size:13px;font-family:var(--font-mono);color:var(--text-dim);word-break:break-all;">
+    SHA-256: 093958FBADF75F7DFB71DD8B28F24E07213DB01A88830F074A8E30485FC32F10
+  </p>
+  <p>
+    <a class="link-arrow" href="https://github.com/radiantTAB/Radiant-QuikQA-dist/releases/tag/v1.1.0">View release notes &amp; manual on GitHub &rarr;</a>
+  </p>
+
+  <h2>What's in it</h2>
+  <ul>
+    <li><strong>Winston-Lutz</strong> &mdash; MV / kV / CBCT isocenter and BB coincidence.</li>
+    <li><strong>Picket Fence</strong> &mdash; MLC leaf positional accuracy (TG-142 monthly).</li>
+    <li><strong>VMAT</strong> &mdash; DRGS and DRMLC MLC speed / dose-rate constancy.</li>
+    <li><strong>TG-142 MLC leaf-speed</strong> (new in 1.1.0) &mdash; log-based, no portal dosimetry required. Per-leaf RMS error, achieved leaf speed (floor check vs.&nbsp;nominal), max single-leaf error, error-at-speed, beam holds.</li>
+    <li><strong>TG-51 dosimetry</strong> &mdash; photon and electron reference dosimetry with full chamber and electrometer catalogs.</li>
+    <li><strong>DICOM anonymizer</strong> &mdash; tag stripping for safely sharing test data.</li>
+    <li><strong>PDF tools</strong> &mdash; merge, split, rotate, watermark, page numbering, cover.</li>
+  </ul>
+
+  <h2>System requirements</h2>
+  <ul>
+    <li>Windows 10 / 11, 64-bit</li>
+    <li>~250&nbsp;MB free disk for the PyInstaller first-launch unpack cache</li>
+    <li>No installer &mdash; double-click <code>RadiantQuikQA.exe</code></li>
+  </ul>
+
+  <h2>SmartScreen &amp; antivirus</h2>
+  <p>
+    The download is <strong>unsigned</strong>. Windows SmartScreen may
+    warn &ldquo;Windows protected your PC&rdquo; on first launch &mdash;
+    click <em>More info</em> &rarr; <em>Run anyway</em> if you trust the
+    source. PyInstaller single-file executables occasionally trigger
+    antivirus false-positives because of how they self-unpack at
+    startup; this is a known PyInstaller pattern, not behavior in the
+    application.
+  </p>
+
+  <h2>Version note</h2>
+  <p>
+    The bundled manual is <strong>V&nbsp;1.0.1</strong>; the binary is
+    <strong>v1.1.0</strong>. The 1.0.1 manual remains accurate for
+    every other module &mdash; only the new TG-142 MLC leaf-speed
+    addition is not yet documented in the PDF. A 1.1.0 manual update is
+    in progress.
+  </p>
+
+  <h2>License &amp; full disclaimer</h2>
+  <p>
+    By downloading or using this software you agree to the
+    <a href="https://github.com/radiantTAB/Radiant-QuikQA-dist/blob/main/LICENSE">proprietary evaluation license</a>
+    (no clinical use, no redistribution, no warranty) and the
+    <a href="https://github.com/radiantTAB/Radiant-QuikQA-dist/blob/main/DISCLAIMER.md">clinical-use disclaimer</a>.
+  </p>
+
+  <h2>Reporting issues</h2>
+  <p>
+    Email
+    <a href="mailto:tbernath@radiant-mpc.com">tbernath@radiant-mpc.com</a>
+    with a description, the version (right-click
+    <code>RadiantQuikQA.exe</code> &rarr; <em>Properties</em> &rarr;
+    <em>Details</em> &mdash; should read <strong>1.1.0.0</strong>), and
+    only if relevant and <strong>fully de-identified</strong>, minimal
+    reproduction data. <strong>Do not send PHI.</strong>
+  </p>
+
+  <p style="margin-top:48px;">
+    <a class="link-arrow" href="tools.html">&larr; Back to all tools</a>
+  </p>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">◐</span>
+        <span class="brand-text">Radiant<span class="brand-accent">.</span></span>
+      </div>
+      <p class="footer-tag">Medical Physics Consulting LLC</p>
+    </div>
+    <div class="footer-meta">
+      <a href="mailto:tbernath@radiant-mpc.com">tbernath@radiant-mpc.com</a>
+      <span>© 2026 Radiant Medical Physics Consulting LLC</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
