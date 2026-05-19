@@ -474,6 +474,17 @@ a:hover { color: var(--accent-bright); }
   color: var(--accent);
 }
 
+/* About-page portrait */
+.about-photo {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  float: right;
+  margin: 0 0 24px 32px;
+  display: block;
+}
+
 /* Service block */
 .service-block {
   border: 1px solid var(--line);
@@ -588,4 +599,5 @@ a:hover { color: var(--accent-bright); }
   .footer-meta { align-items: flex-start; }
   .contact-row { flex-direction: column; gap: 4px; }
   .contact-row .value { text-align: left; }
+  .about-photo { float: none; margin: 0 0 32px; width: min(60%, 240px); }
 }
