@@ -69,7 +69,7 @@ a:hover { color: var(--accent-bright); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px var(--pad-x);
+  padding: 22px var(--pad-x);
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -83,13 +83,13 @@ a:hover { color: var(--accent-bright); }
 
 /* Logo image — used in nav and footer in place of the prior text mark */
 .brand-logo {
-  height: 56px;
+  height: 160px;
   width: auto;
   display: block;
 }
 
 .footer .brand-logo {
-  height: 64px;
+  height: 80px;
 }
 
 .nav-links {
@@ -590,8 +590,8 @@ a:hover { color: var(--accent-bright); }
 @media (max-width: 720px) {
   .nav-links { gap: 18px; }
   .nav-links a:not(.nav-cta) { display: none; }
-  .brand-logo { height: 44px; }
-  .footer .brand-logo { height: 48px; }
+  .brand-logo { height: 100px; }
+  .footer .brand-logo { height: 56px; }
   .hero { min-height: 70vh; }
   .hero-logo { opacity: 0.22; right: -22%; width: 90%; }
   .hero-deco { opacity: 0.18; right: -30%; }
