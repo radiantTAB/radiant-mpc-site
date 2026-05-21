@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — Radiant Software Suite | Radiant Medical Physics Consulting</title>
-<meta name="description" content="The Radiant Software Suite — ten focused applications for radiation oncology physics and independent consulting. Precision physics, in software.">
+<title>Radiant QuikDose — EQD2/BED Dose Accumulation | Radiant Medical Physics Consulting</title>
+<meta name="description" content="Radiant QuikDose — EQD2 and BED dose accumulation for HDR brachytherapy and external-beam re-irradiation. Two ESAPI binary plugins for Varian Eclipse v15.6.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -100,7 +100,7 @@ img{max-width:100%;display:block}
 .footer-meta a{color:var(--text-mute)}
 .footer-meta a:hover{color:var(--accent)}
 
-/* ---- Product-page layout (shared with the nine product pages) ---- */
+/* ---- Product-page layout (shared with the suite product pages) ---- */
 .prod-hero{padding:54px var(--pad-x) 56px;position:relative;z-index:2}
 .prod-hero-inner{max-width:var(--max-w);margin:0 auto}
 .crumb{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:26px}
@@ -221,134 +221,164 @@ img{max-width:100%;display:block}
   </div>
 </nav>
 
-<!-- ===== Hero banner ===== -->
-<header class="hub-hero-band">
-  <div class="hub-hero">
-    <div class="eyebrow"><span class="eyebrow-dot"></span><span>The Radiant Software Suite</span></div>
-    <h1>Radiant Software Suite<em>Precision physics, in software.</em></h1>
-    <p>
-      Ten focused applications for radiation oncology physics and the business
-      of independent consulting — each one born from a real workflow bottleneck
-      and built to run on your own machine.
-    </p>
+<!-- ===== Product hero ===== -->
+<header class="prod-hero">
+  <div class="prod-hero-inner">
+    <div class="crumb"><a href="products.html">Products</a> / Radiant QuikDose</div>
+    <div class="prod-hero-grid">
+      <div>
+        <span class="prod-tag">Clinical Tool · Eclipse Binary Plugin</span>
+        <h1>Radiant QuikDose</h1>
+        <p class="prod-lede">
+          EQD2 and BED dose accumulation for Varian Eclipse v15.6 — two ESAPI
+          binary plugins that put radiobiological summation where the planning
+          happens. Track an HDR brachytherapy course fraction by fraction, or
+          sum prior external-beam courses into a voxel-level cumulative EQD2 for
+          re-irradiation review.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="downloads.html"><svg class="ic"><use href="#i-lock"/></svg> Plugin Downloads</a>
+          <a class="btn btn-ghost" href="mailto:info@Radiant-MPC.com?subject=Demo%20request%3A%20Radiant%20QuikDose"><svg class="ic"><use href="#i-mail"/></svg> Request a Demo</a>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span></div>
+        <div class="shot-body">
+          <svg class="ic"><use href="#i-gauge"/></svg>
+          <span class="shot-cap">QuikDose · EQD2 / BED</span>
+          <span class="shot-sub">Cumulative radiobiological dose for HDR brachytherapy and external-beam re-irradiation, inside Eclipse.</span>
+        </div>
+      </div>
+    </div>
+    <div class="note">
+      <svg class="ic"><use href="#i-alert"/></svg>
+      <p><strong>Draft / evaluation tool — not validated for clinical use.</strong> QuikDose computes EQD2/BED as decision support, not a finished clinical determination. Every plugin must be independently reviewed, verified against an independent calculation, tested on non-clinical data, and approved by a Qualified Medical Physicist through the Eclipse script-approval and site software-commissioning process before any clinical use. Built-in α/β values and retreatment constraints are starting values — your clinic's policy takes precedence.</p>
+    </div>
   </div>
 </header>
 
-<!-- ===== Clinical Tools ===== -->
+<!-- ===== Features ===== -->
 <section class="section">
   <div class="section-inner">
     <div class="section-head">
-      <div class="section-kicker"><svg class="ic"><use href="#i-shield"/></svg><span>Clinical Tools</span></div>
-      <h2>Built for the clinic.</h2>
-      <p>Software for the day-to-day work of radiation oncology physics — machine QA, planning support, dose accumulation, shielding design, regulatory reference, and patient care.</p>
+      <div class="section-kicker"><svg class="ic"><use href="#i-gauge"/></svg><span>Features</span></div>
+      <h2>What QuikDose does.</h2>
+      <p>Two focused ESAPI binary plugins — one for HDR brachytherapy, one for external-beam re-irradiation — sharing the same linear-quadratic radiobiology and the same Radiant clinical-safety discipline.</p>
     </div>
-    <div class="card-grid">
+    <div class="feature-grid">
 
-      <a class="prod-card" href="quikqa.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-target"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikQA</h3>
-        <p>PyLinac-powered linac QA — Winston-Lutz, Picket Fence, VMAT, leaf-speed, and TG-51 dosimetry in one standalone Windows app.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-droplet"/></svg></div>
+        <h3>HDR Brachytherapy Tracking</h3>
+        <p>Per-fraction EQD2 and BED accumulation across an HDR course in a spreadsheet-style tracking layout, with the remaining EQD2 budget back-converted to a physical dose per fraction.</p>
+      </div>
 
-      <a class="prod-card" href="quikbolus.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-cube"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikBolus</h3>
-        <p>Turns a DICOM RT Structure Set into a watertight, 3D-printable bolus STL — no CAD step required.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-layers"/></svg></div>
+        <h3>External-Beam Cumulative EQD2</h3>
+        <p>Voxel-level cumulative EQD2 for re-irradiation planning — prior in-Eclipse and Velocity-imported courses summed onto the current planning CT with per-OAR α/β assignment.</p>
+      </div>
 
-      <a class="prod-card" href="quikcalc.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-calc"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikCalc</h3>
-        <p>Independent MU checks, radiobiology, and treatment-gap math — each producing a Radiant-branded PDF report.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-shield"/></svg></div>
+        <h3>Retreatment Constraint Checks</h3>
+        <p>Traffic-light compliance against published retreatment limits — Timmerman SBRT, Jereczek-Fossa pelvic, and QUANTEC cord/brainstem retreatment supplements — that your own policy can override.</p>
+      </div>
 
-      <a class="prod-card" href="quikdose.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-gauge"/></svg></div>
-        <div class="card-tag">Eclipse Binary Plugin</div>
-        <h3>Radiant QuikDose</h3>
-        <p>EQD2 and BED dose accumulation for HDR brachytherapy and external-beam re-irradiation — two ESAPI binary plugins for Varian Eclipse v15.6.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-calc"/></svg></div>
+        <h3>Radiobiology, Shown Plainly</h3>
+        <p>Standard linear-quadratic EQD2 and BED with explicit per-fraction dose and time-dependent recovery factors — the same equations a physicist would check by hand.</p>
+      </div>
 
-      <a class="prod-card" href="quikshare.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-lock"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikShare</h3>
-        <p>HIPAA-conscious, AES-256 encrypted DICOM transfer with OneDrive delivery and a full audit trail.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-cpu"/></svg></div>
+        <h3>Runs Inside Eclipse</h3>
+        <p>Read-only ESAPI binary plugins for Eclipse v15.6. They run on the ARIA-authenticated workstation against the open patient — no database wiring, and no PHI leaves the clinic.</p>
+      </div>
 
-      <a class="prod-card" href="quikshield.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-shield"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikShield</h3>
-        <p>NCRP 151 radiation shielding design for megavoltage therapy vaults, with fully cited, clinic-ready reports.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
-
-      <a class="prod-card" href="quikref.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-search"/></svg></div>
-        <div class="card-tag">Local Web App</div>
-        <h3>Radiant QuikRef</h3>
-        <p>Ask one question, get a synthesized answer across federal, state, and society radiation guidance — every claim cited.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
-
-      <a class="prod-card" href="quikcare.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-doc"/></svg></div>
-        <div class="card-tag">Local Web App</div>
-        <h3>Radiant QuikCARE</h3>
-        <p>Generates personalized, physician-signed radiation therapy patient education packets in seconds.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+      <div class="feature">
+        <div class="feat-icon"><svg class="ic"><use href="#i-chart"/></svg></div>
+        <h3>DVH Overlays &amp; DICOM Export</h3>
+        <p>Prior, current, and cumulative EQD2 on shared DVH axes, plus DICOM RTDOSE export of the cumulative distribution for re-import and visualization in Eclipse.</p>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ===== Contractor Tools ===== -->
+<!-- ===== Two plugins ===== -->
 <section class="section alt">
   <div class="section-inner">
     <div class="section-head">
-      <div class="section-kicker"><svg class="ic"><use href="#i-chart"/></svg><span>Contractor Tools</span></div>
-      <h2>Built for the business.</h2>
-      <p>The back-office side of independent practice — bookkeeping and payroll that stay entirely on your own machine, with no cloud and no subscription.</p>
+      <div class="section-kicker"><svg class="ic"><use href="#i-layers"/></svg><span>Two Plugins, One Product</span></div>
+      <h2>Pick the module the case needs.</h2>
+      <p>QuikDose ships as two independent <code>.esapi.dll</code> binary plugins. Approve and deploy whichever your program uses — or both.</p>
     </div>
     <div class="card-grid">
+      <div class="prod-card">
+        <div class="card-icon"><svg class="ic"><use href="#i-droplet"/></svg></div>
+        <div class="card-tag">QuikDoseHDR.esapi</div>
+        <h3>QuikDose HDR</h3>
+        <p>HDR brachytherapy EQD2/BED course tracker — fuzzy OAR structure matching, per-fraction accumulation, and remaining-budget back-conversion in a spreadsheet-style layout.</p>
+        <span class="card-link">In the password-protected download area <svg class="ic"><use href="#i-lock"/></svg></span>
+      </div>
+      <div class="prod-card">
+        <div class="card-icon"><svg class="ic"><use href="#i-layers"/></svg></div>
+        <div class="card-tag">QuikDoseEBRT.esapi</div>
+        <h3>QuikDose EBRT</h3>
+        <p>External-beam re-irradiation cumulative EQD2 — voxel-level summation of prior courses, per-OAR α/β, recovery factors, constraint checks, and DICOM RTDOSE export.</p>
+        <span class="card-link">In the password-protected download area <svg class="ic"><use href="#i-lock"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <a class="prod-card" href="quikflow.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-chart"/></svg></div>
-        <div class="card-tag">Installable PWA</div>
-        <h3>Radiant QuikFlow</h3>
-        <p>Income, expense, mileage, and P&amp;L tracking for the single-member consulting LLC — offline-first and installable.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
+<!-- ===== Who it's for ===== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-kicker"><svg class="ic"><use href="#i-users"/></svg><span>Who It's For</span></div>
+      <h2>Made for the re-treatment decision.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-copy">
+        <p>QuikDose is built for the medical physicist supporting re-irradiation and brachytherapy programs — where the question is rarely "what is the dose" but "what is the <em>cumulative</em> dose, and where does it land relative to a constraint that has already been spent once." It puts that math next to the plan, in Eclipse, instead of in a spreadsheet alongside it.</p>
+        <p>Both plugins are converted from single-file scripts already in clinical-implementation use, repackaged as compiled binary plugins so they install, version, and approve cleanly. The radiobiology is unchanged in conversion — and, like every Radiant tool, QuikDose is distributed as an evaluation build: its output is decision support for physicist review and formal approval, never an automatic clinical determination.</p>
+      </div>
+      <div class="who-card">
+        <div class="feat-icon"><svg class="ic"><use href="#i-users"/></svg></div>
+        <h3>Best fit for</h3>
+        <ul>
+          <li>Re-irradiation planning &amp; review</li>
+          <li>HDR brachytherapy programs</li>
+          <li>Eclipse v15.6 plugin clinics</li>
+          <li>Cumulative-dose decision support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <a class="prod-card" href="quikpay.html">
-        <div class="card-icon"><svg class="ic"><use href="#i-dollar"/></svg></div>
-        <div class="card-tag">Windows Desktop</div>
-        <h3>Radiant QuikPay</h3>
-        <p>100% local payroll for the small consulting LLC — withholding, employer taxes, W-2s, and owner draws, no cloud.</p>
-        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
-      </a>
-
+<!-- ===== Testimonial ===== -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="quote-card">
+      <svg class="ic q-mark"><use href="#i-quote"/></svg>
+      <p class="quote-text">A short, specific quote from a physicist who has used QuikDose for a re-irradiation or brachytherapy case will appear here.</p>
+      <p class="quote-meta">— Name, Title · Institution</p>
+      <p class="quote-ph">Testimonial placeholder — used QuikDose? Share your experience at info@Radiant-MPC.com</p>
     </div>
   </div>
 </section>
 
 <!-- ===== CTA ===== -->
 <section class="cta-band">
-  <h2>Don't see your workflow?</h2>
-  <p>Radiant builds tools to fit clinical and consulting workflows that off-the-shelf software doesn't address. If it wastes physicist time, it's probably worth automating.</p>
+  <h2>Bring QuikDose into your re-treatment workflow</h2>
+  <p>Request a walkthrough tailored to the brachytherapy and re-irradiation cases your program sees — no obligation.</p>
   <div class="cta-actions">
-    <a class="btn btn-primary" href="mailto:info@Radiant-MPC.com?subject=Radiant%20Software%20Suite%20enquiry"><svg class="ic"><use href="#i-mail"/></svg> Request a Demo</a>
-    <a class="btn btn-ghost" href="contact.html">Get in touch</a>
+    <a class="btn btn-primary" href="downloads.html"><svg class="ic"><use href="#i-lock"/></svg> Plugin Downloads</a>
+    <a class="btn btn-ghost" href="products.html"><svg class="ic"><use href="#i-arrow-left"/></svg> All Products</a>
   </div>
 </section>
 

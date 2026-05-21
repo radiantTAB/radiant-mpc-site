@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuikDose Plugin Downloads — Protected Area | Radiant Medical Physics Consulting</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Password-protected download area for the Radiant QuikDose ESAPI binary plugins.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== Radiant Software Suite — shared embedded stylesheet (light theme) ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg-elev:#fafafa;--bg-card:#f4f4f5;
+  --line:#e6e6e8;--line-hi:#cdcdd1;
+  --text:#1a1a1a;--text-mute:#5a5a5a;--text-dim:#8a8a8a;
+  --accent:#d00008;--accent-2:#a80006;--accent-bright:#f03020;--accent-warm:#f86058;
+  --charcoal:#303030;
+  --font-display:'Montserrat',system-ui,sans-serif;
+  --font-body:'Montserrat',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --max-w:1180px;--pad-x:clamp(20px,5vw,64px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(208,0,8,.035) 1px,transparent 0);background-size:32px 32px;pointer-events:none;z-index:0}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-bright)}
+img{max-width:100%;display:block}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---- Nav ---- */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad-x);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand-logo{height:160px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{color:var(--text-mute);font-size:14px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{padding:9px 18px;border:1px solid var(--line-hi);border-radius:999px;color:var(--text)!important;transition:all .2s}
+.nav-cta:hover{border-color:var(--accent);color:var(--accent)!important;background:rgba(208,0,8,.06)}
+
+/* ---- Buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;font-family:var(--font-body);font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;transition:all .2s;border:1px solid transparent;cursor:pointer}
+.btn .ic{width:17px;height:17px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-2);color:#fff;transform:translateY(-1px);box-shadow:0 8px 24px rgba(208,0,8,.25)}
+.btn-ghost{color:var(--text);border-color:var(--line-hi)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---- Sections ---- */
+.section{padding:80px var(--pad-x);position:relative;z-index:2}
+.section.alt{background:var(--bg-elev);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.section-inner{max-width:var(--max-w);margin:0 auto}
+.section-head{margin-bottom:40px}
+.section-kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:16px}
+.section-kicker .ic{width:16px;height:16px}
+.section-head h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.section-head p{color:var(--text-mute);max-width:640px}
+
+/* ---- Footer ---- */
+.footer{padding:48px var(--pad-x);border-top:1px solid var(--line);background:var(--bg-elev);position:relative;z-index:2}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:32px}
+.footer .brand-logo{height:80px}
+.footer-tag{color:var(--text-dim);font-size:13px;margin-top:6px}
+.footer-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:13px;color:var(--text-dim)}
+.footer-meta a{color:var(--text-mute)}
+.footer-meta a:hover{color:var(--accent)}
+
+.note{border:1px solid var(--line);border-left:3px solid var(--accent-warm);background:var(--bg-elev);padding:20px 24px;display:flex;gap:14px;align-items:flex-start;margin-top:34px}
+.note .ic{width:22px;height:22px;color:var(--accent-warm);margin-top:1px}
+.note p{font-size:14px;color:var(--text-mute);margin:0;line-height:1.6}
+.crumb{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:26px}
+.crumb a{color:var(--text-mute)}
+
+/* ---- Password gate ---- */
+.gate-wrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 205px);padding:60px var(--pad-x);position:relative;z-index:2}
+.gate-card{width:100%;max-width:420px;background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--accent);padding:40px 36px;text-align:center}
+.gate-lock{width:62px;height:62px;border-radius:14px;background:rgba(208,0,8,.07);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.gate-lock .ic{width:30px;height:30px;color:var(--accent)}
+.gate-card h1{font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.gate-card p{font-size:14px;color:var(--text-mute);margin-bottom:24px}
+.gate-form{display:flex;flex-direction:column;gap:12px}
+.gate-input{font-family:var(--font-body);font-size:15px;padding:13px 16px;border:1px solid var(--line-hi);border-radius:8px;background:var(--bg-elev);color:var(--text);width:100%}
+.gate-input:focus{outline:none;border-color:var(--accent);background:var(--bg)}
+.gate-btn{justify-content:center;width:100%}
+.gate-error{font-size:13px;color:var(--accent);min-height:18px;font-weight:600}
+.gate-hint{font-size:12px;color:var(--text-dim);margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+
+/* ---- Download vault ---- */
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px;margin-top:8px}
+.dl-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--accent);padding:30px}
+.dl-icon{width:54px;height:54px;border-radius:12px;background:rgba(208,0,8,.07);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.dl-icon .ic{width:27px;height:27px;color:var(--accent)}
+.dl-card h3{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:6px}
+.dl-file{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:12px}
+.dl-card>p{font-size:14px;color:var(--text-mute);line-height:1.55;margin-bottom:16px;flex:1}
+.dl-meta{list-style:none;margin-bottom:20px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim)}
+.dl-meta li{display:flex;gap:8px;margin-bottom:5px}
+.dl-meta li::before{content:'·';color:var(--accent)}
+.dl-actions{display:flex;flex-wrap:wrap;gap:10px}
+.signout{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--text-mute);cursor:pointer;background:none;border:none;font-family:var(--font-body)}
+.signout:hover{color:var(--accent)}
+.signout .ic{width:15px;height:15px}
+
+@media(max-width:720px){
+  .nav-links{gap:16px}
+  .nav-links a:not(.nav-cta){display:none}
+  .brand-logo{height:96px}
+  .footer .brand-logo{height:54px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-meta{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Shared SVG icon library ===== -->
+<svg class="svg-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3"/><path d="M16 5l3 3"/></symbol>
+<symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 19h16"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4l-8 14a2 2 0 0 0 1.7 3h16a2 2 0 0 0 1.7-3l-8-14a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h0"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5"/><path d="M11 6l-6 6 6 6"/></symbol>
+</svg>
+
+<!-- ===== Nav ===== -->
+<nav class="nav">
+  <a href="index.html" class="brand" aria-label="Radiant Medical Physics Consulting LLC">
+    <img src="radiant-logo.png" alt="Radiant Medical Physics Consulting LLC" class="brand-logo">
+  </a>
+  <div class="nav-links">
+    <a href="services.html">Services</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- ===== Password gate (shown until unlocked) ===== -->
+<div id="gate" class="gate-wrap">
+  <div class="gate-card">
+    <div class="gate-lock"><svg class="ic"><use href="#i-lock"/></svg></div>
+    <h1>QuikDose Downloads</h1>
+    <p>This area is restricted to licensed Radiant QuikDose users. Enter the access password provided with your agreement.</p>
+    <form class="gate-form" id="gateForm" autocomplete="off">
+      <input type="password" id="gatePw" class="gate-input" placeholder="Access password" aria-label="Access password" required>
+      <button type="submit" class="btn btn-primary gate-btn"><svg class="ic"><use href="#i-key"/></svg> Unlock Downloads</button>
+      <div class="gate-error" id="gateError" role="alert"></div>
+    </form>
+    <p class="gate-hint">Need access? Email <a href="mailto:info@Radiant-MPC.com?subject=QuikDose%20download%20access">info@Radiant-MPC.com</a>.</p>
+  </div>
+</div>
+
+<!-- ===== Download vault (revealed after unlock) ===== -->
+<main id="vault" hidden>
+  <section class="section">
+    <div class="section-inner">
+      <div class="crumb"><a href="products.html">Products</a> / <a href="quikdose.html">Radiant QuikDose</a> / Downloads</div>
+      <div class="section-head">
+        <div class="section-kicker"><svg class="ic"><use href="#i-download"/></svg><span>Protected Download Area</span></div>
+        <h2>QuikDose ESAPI binary plugins.</h2>
+        <p>Compiled <code>.esapi.dll</code> plugins for Varian Eclipse v15.6. Each must be approved through the Eclipse script-approval workflow by a Qualified Medical Physicist before use.</p>
+      </div>
+
+      <div class="dl-grid">
+
+        <div class="dl-card">
+          <div class="dl-icon"><svg class="ic"><use href="#i-droplet"/></svg></div>
+          <h3>QuikDose HDR</h3>
+          <div class="dl-file">QuikDoseHDR.esapi.dll</div>
+          <p>EQD2/BED dose accumulation for HDR brachytherapy — per-fraction tracking, fuzzy OAR matching, and remaining-budget back-conversion.</p>
+          <ul class="dl-meta">
+            <li>Version 1.0.0 · Eclipse v15.6</li>
+            <li>x64 · read-only ESAPI plugin</li>
+            <li>.NET Framework 4.6.1</li>
+          </ul>
+          <div class="dl-actions">
+            <a class="btn btn-primary" href="https://github.com/radiantTAB/Radiant_QuikDose_dist/releases" rel="noopener"><svg class="ic"><use href="#i-download"/></svg> Download Plugin</a>
+            <a class="btn btn-ghost" href="https://github.com/radiantTAB/Radiant_QuikDose_dist/releases" rel="noopener"><svg class="ic"><use href="#i-doc"/></svg> Release Notes</a>
+          </div>
+        </div>
+
+        <div class="dl-card">
+          <div class="dl-icon"><svg class="ic"><use href="#i-layers"/></svg></div>
+          <h3>QuikDose EBRT</h3>
+          <div class="dl-file">QuikDoseEBRT.esapi.dll</div>
+          <p>Cumulative EQD2 for external-beam re-irradiation — voxel-level course summation, per-OAR α/β, retreatment constraint checks, and DICOM RTDOSE export.</p>
+          <ul class="dl-meta">
+            <li>Version 1.0.0 · Eclipse v15.6</li>
+            <li>x64 · read-only ESAPI plugin</li>
+            <li>.NET Framework 4.6.1</li>
+          </ul>
+          <div class="dl-actions">
+            <a class="btn btn-primary" href="https://github.com/radiantTAB/Radiant_QuikDose_dist/releases" rel="noopener"><svg class="ic"><use href="#i-download"/></svg> Download Plugin</a>
+            <a class="btn btn-ghost" href="https://github.com/radiantTAB/Radiant_QuikDose_dist/releases" rel="noopener"><svg class="ic"><use href="#i-doc"/></svg> Release Notes</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note">
+        <svg class="ic"><use href="#i-alert"/></svg>
+        <p><strong>Draft / evaluation software — not validated for clinical use.</strong> Each plugin must be independently reviewed, verified against an independent calculation, tested on non-clinical data, and approved by a Qualified Medical Physicist through the Eclipse script-approval and site software-commissioning process before any clinical use. Do not redistribute these binaries outside your licensed organization.</p>
+      </div>
+
+      <p style="margin-top:28px">
+        <button class="signout" id="signout"><svg class="ic"><use href="#i-lock"/></svg> Lock this area</button>
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand">
+        <img src="radiant-logo.png" alt="Radiant Medical Physics Consulting LLC" class="brand-logo">
+      </div>
+      <p class="footer-tag">Medical Physics Consulting LLC</p>
+    </div>
+    <div class="footer-meta">
+      <a href="mailto:tbernath@radiant-mpc.com">tbernath@radiant-mpc.com</a>
+      <span>© 2026 Radiant Medical Physics Consulting LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================================
+   QuikDose download gate
+   ----------------------------------------------------------------------------
+   LIGHT CLIENT-SIDE GATE. This keeps casual visitors and search engines out of
+   the download area. It is NOT strong security: a determined visitor can read
+   this script and brute-force the password hash offline. For real protection,
+   put this page behind server-side auth (see the project docs — Cloudflare
+   Access is recommended) and keep the actual .esapi.dll binaries in a PRIVATE
+   GitHub releases repository.
+
+   To change the password:
+     1. Pick a new password.
+     2. Compute its SHA-256 hash, e.g. in PowerShell:
+          $b=[Text.Encoding]::UTF8.GetBytes('YOUR-NEW-PASSWORD')
+          ([Security.Cryptography.SHA256]::Create().ComputeHash($b)|
+            ForEach-Object ToString x2) -join ''
+     3. Paste the hash into PW_HASH below.
+
+   Current password:  QuikDose-d909e743
+   (Set 2026-05-21. Change it any time using the steps above.)
+============================================================================ */
+(function () {
+  var PW_HASH = "ae11a04fd46be4240fa9f590f1ae0847b78d7e15278adc625467ca5aa187fa4f";
+  var KEY = "quikdose-unlocked";
+
+  var gate    = document.getElementById("gate");
+  var vault   = document.getElementById("vault");
+  var form    = document.getElementById("gateForm");
+  var pw      = document.getElementById("gatePw");
+  var errBox  = document.getElementById("gateError");
+
+  function reveal() {
+    gate.hidden = true;
+    gate.style.display = "none";
+    vault.hidden = false;
+  }
+
+  async function sha256Hex(text) {
+    var data = new TextEncoder().encode(text);
+    var buf  = await crypto.subtle.digest("SHA-256", data);
+    return Array.prototype.map
+      .call(new Uint8Array(buf), function (b) {
+        return b.toString(16).padStart(2, "0");
+      })
+      .join("");
+  }
+
+  // Stay unlocked for the rest of the browser session.
+  if (sessionStorage.getItem(KEY) === "1") reveal();
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    errBox.textContent = "";
+    try {
+      var hash = await sha256Hex(pw.value);
+      if (hash === PW_HASH) {
+        sessionStorage.setItem(KEY, "1");
+        reveal();
+      } else {
+        errBox.textContent = "Incorrect password. Please try again.";
+        pw.value = "";
+        pw.focus();
+      }
+    } catch (ex) {
+      errBox.textContent = "This browser could not process the password. Use a current browser over HTTPS.";
+    }
+  });
+
+  document.getElementById("signout").addEventListener("click", function () {
+    sessionStorage.removeItem(KEY);
+    location.reload();
+  });
+})();
+</script>
+
+</body>
+</html>
