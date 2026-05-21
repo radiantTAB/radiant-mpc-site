@@ -1,0 +1,4 @@
+RADIANT QUIKSHARE — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikShare is HIPAA-conscious, AES-256 encrypted DICOM transfer. Point it at a folder of DICOM exports, and it inventories every file, identifies the patient, and refuses to proceed if files from multiple patients are mixed in. It builds an encrypted archive with header encryption — even the filenames inside are hidden — and generates a twenty-character random passphrase with phone-friendly formatting. It uploads the archive to OneDrive for Business and creates an expiring sharing link, then drafts the recipient email with a SHA-256 integrity hash. Every disclosure is written to a dual-location audit log suitable for HIPAA accounting — and passphrases are stored only as salted hashes, never in plain text. Radiant QuikShare — precision physics, in software.

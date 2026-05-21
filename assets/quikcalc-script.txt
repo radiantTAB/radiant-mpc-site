@@ -1,0 +1,4 @@
+RADIANT QUIKCALC — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikCalc is a standalone medical-physics calculation toolkit — independent MU checks, radiobiology, and treatment-gap math, all ESAPI-free. The MU verify tab runs an independent monitor-unit check using the TG-114 hand-calculation method, with clear action and fail tolerances. The radiobiology tab computes BED and EQD2 through the linear-quadratic model, with unlimited prior courses and an editable alpha-beta table. The treatment-gap tab reproduces the Orton-Ellis decay workbook exactly. General tools cover inverse-square and temperature-pressure corrections. Every tab produces a Radiant-branded PDF report, ready for the chart. QuikCalc is pure manual entry — no treatment-planning-system connection, no internet — a single portable Windows executable that runs anywhere. Radiant QuikCalc — precision physics, in software.

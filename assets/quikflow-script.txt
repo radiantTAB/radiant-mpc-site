@@ -1,0 +1,4 @@
+RADIANT QUIKFLOW — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikFlow is income, expense, and profit-and-loss tracking for the single-member consulting LLC. It opens on a dashboard — income, expenses, and net profit or loss for the month and year-to-date, with charts. Log 1099 income by payer and category, or import it from a spreadsheet. Track expenses with receipt photos, grouped by client engagement into trips, and log business mileage at the IRS standard rate. Optional AI receipt scanning fills in the amount, merchant, and date from a photo. The profit-and-loss report covers any period — month, quarter, or year — and exports to CSV and PDF. QuikFlow installs as an app and runs entirely in your browser, with every number kept on your own device. Radiant QuikFlow — precision physics, in software.

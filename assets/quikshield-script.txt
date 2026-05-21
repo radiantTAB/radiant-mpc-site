@@ -1,0 +1,4 @@
+RADIANT QUIKSHIELD — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikShield brings NCRP Report 151 shielding design for megavoltage therapy vaults onto your workstation. It calculates primary barriers, secondary leakage and scatter, neutron shielding at ten megavolts and above, and the maze and door. Enter geometry by hand, or drop in a PDF or PNG plan view — set the scale with two clicks, click the points of interest, and distances and scatter angles compute automatically. Every barrier carries a step-by-step audit trail: the formula, the substituted values, the result, and the NCRP citation. QuikShield generates a clinic-ready Word report with the annotated drawing embedded. All reference data lives in editable JSON, and an optional AI pass adds plain-language explanations and a sanity check. Radiant QuikShield — precision physics, in software.

@@ -1,0 +1,4 @@
+RADIANT QUIKBOLUS — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikBolus turns a DICOM RT Structure Set into a watertight, 3D-printable bolus STL in minutes — with no CAD step. Point it at the structure set, and QuikBolus auto-detects the body and bolus contours. It reconstructs the bolus as a solid mesh — rasterizing the contours, interpolating between slices, and smoothing the surface. It fits a flat base plate of your chosen thickness, welded on cleanly. The watertight guarantee voxel-remeshes any imperfect result into a sealed, manifold solid, so the exported STL is always printable — no failed prints. You can preview the bolus in 3D against the patient surface before exporting, then open it in a branded, fully offline viewer. The final STL drops to the print bed with a clinical stats report of dimensions and volume. Radiant QuikBolus — precision physics, in software.

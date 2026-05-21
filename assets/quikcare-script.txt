@@ -1,0 +1,4 @@
+RADIANT QUIKCARE — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikCARE generates personalized radiation therapy patient education packets in seconds. Front-desk staff enter the patient's name and date of birth, pick a radiation oncologist, and select the treatment site — and QuikCARE produces a polished, branded Word document and PDF. Each packet carries a welcome letter signed by the selected physician, that physician's full bio, and site-specific content: diagnosis, simulation, side effects, and self-care. The physician roster and the treatment-site library are fully editable through the web interface — add a doctor or a new treatment site with no code changes. Upload your logo and brand colors once, and every packet matches. Radiant QuikCARE — a customized approach to radiation education.

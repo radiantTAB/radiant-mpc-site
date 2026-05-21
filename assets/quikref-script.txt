@@ -1,0 +1,4 @@
+RADIANT QUIKREF — DEMO NARRATION SCRIPT
+Approximately 60 seconds. Paste into a voice-over tool, or record in your own voice.
+
+Radiant QuikRef is a local-first reference tool for medical physicists. Ask one question in plain language, and QuikRef retrieves the relevant passages and synthesizes a single, structured answer — drawn from federal radiation regulations, state regulations, and professional-society guidance. Every claim ends with an inline citation to the source document, section, and page. When sources disagree, QuikRef flags the conflict instead of papering over it — and it says "not addressed" rather than guessing. Click any citation to jump straight to that page in the original PDF. Everything runs on your machine, with a local vector store — your corpus and your questions stay on the workstation. Radiant QuikRef — precision physics, in software.
