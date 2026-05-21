@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radiant QuikQA — Linac QA Suite | Radiant Medical Physics Consulting</title>
-<meta name="description" content="Radiant QuikQA — PyLinac-powered Windows QA tool for radiation oncology physics: Winston-Lutz, Picket Fence, VMAT, TG-142 MLC leaf-speed, TG-51 dosimetry, and DICOM tools.">
+<title>Products — Radiant Software Suite | Radiant Medical Physics Consulting</title>
+<meta name="description" content="The Radiant Software Suite — nine focused applications for radiation oncology physics and independent consulting. Built by physicists, for physicists.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -221,135 +221,126 @@ img{max-width:100%;display:block}
   </div>
 </nav>
 
-<!-- ===== Product hero ===== -->
-<header class="prod-hero">
-  <div class="prod-hero-inner">
-    <div class="crumb"><a href="products.html">Products</a> / Radiant QuikQA</div>
-    <div class="prod-hero-grid">
-      <div>
-        <span class="prod-tag">Clinical Tool · Windows Desktop</span>
-        <h1>Radiant QuikQA</h1>
-        <p class="prod-lede">
-          PyLinac-powered machine QA for radiation oncology physics —
-          Winston-Lutz, Picket Fence, VMAT, TG-142 MLC leaf-speed, and TG-51
-          dosimetry, all in one standalone Windows application.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:info@Radiant-MPC.com?subject=Demo%20request%3A%20Radiant%20QuikQA"><svg class="ic"><use href="#i-mail"/></svg> Request a Demo</a>
-          <a class="btn btn-ghost" href="https://github.com/radiantTAB/Radiant_QuikQA_dist/releases"><svg class="ic"><use href="#i-download"/></svg> Evaluation Build</a>
-        </div>
-      </div>
-      <div class="shot">
-        <div class="shot-bar"><span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span></div>
-        <div class="shot-body">
-          <svg class="ic"><use href="#i-target"/></svg>
-          <div class="shot-cap">Radiant QuikQA</div>
-          <div class="shot-sub">Product screenshot to be added — drop an image in here.</div>
-        </div>
-      </div>
-    </div>
-    <div class="note">
-      <svg class="ic"><use href="#i-alert"/></svg>
-      <p><strong>Evaluation / testing use only — not a medical device.</strong> Radiant QuikQA is an unvalidated analysis aid. It must not be used for clinical decision-making, treatment planning, dosimetric calibration, or machine release-to-service. All outputs must be independently reviewed and approved by a Qualified Medical Physicist. Do not transmit PHI through this software.</p>
-    </div>
+<!-- ===== Hero banner ===== -->
+<header class="hub-hero-band">
+  <div class="hub-hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span><span>The Radiant Software Suite</span></div>
+    <h1>Radiant Software Suite<em>Built by Physicists, for Physicists.</em></h1>
+    <p>
+      Nine focused applications for radiation oncology physics and the business
+      of independent consulting — each one born from a real workflow bottleneck
+      and built to run on your own machine.
+    </p>
   </div>
 </header>
 
-<!-- ===== Features ===== -->
+<!-- ===== Clinical Tools ===== -->
 <section class="section">
   <div class="section-inner">
     <div class="section-head">
-      <div class="section-kicker"><svg class="ic"><use href="#i-gauge"/></svg><span>Features</span></div>
-      <h2>What QuikQA does.</h2>
-      <p>One tool for the recurring machine-QA tests — each module produces a clean, reviewable PDF report.</p>
+      <div class="section-kicker"><svg class="ic"><use href="#i-shield"/></svg><span>Clinical Tools</span></div>
+      <h2>Built for the clinic.</h2>
+      <p>Software for the day-to-day work of radiation oncology physics — machine QA, planning support, shielding design, regulatory reference, and patient care.</p>
     </div>
-    <div class="feature-grid">
+    <div class="card-grid">
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-target"/></svg></div>
-        <h3>Winston-Lutz</h3>
-        <p>MV, kV, and CBCT isocenter and BB-coincidence analysis with sub-millimeter reporting.</p>
-      </div>
+      <a class="prod-card" href="quikqa.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-target"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikQA</h3>
+        <p>PyLinac-powered linac QA — Winston-Lutz, Picket Fence, VMAT, leaf-speed, and TG-51 dosimetry in one standalone Windows app.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-grid"/></svg></div>
-        <h3>Picket Fence</h3>
-        <p>MLC leaf positional accuracy for TG-142 monthly checks, with clear pass/fail grading.</p>
-      </div>
+      <a class="prod-card" href="quikbolus.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-cube"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikBolus</h3>
+        <p>Turns a DICOM RT Structure Set into a watertight, 3D-printable bolus STL — no CAD step required.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-wave"/></svg></div>
-        <h3>VMAT QA</h3>
-        <p>DRGS and DRMLC dose-rate and MLC-speed constancy analysis from a single delivery.</p>
-      </div>
+      <a class="prod-card" href="quikcalc.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-calc"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikCalc</h3>
+        <p>Independent MU checks, radiobiology, and treatment-gap math — each producing a Radiant-branded PDF report.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-gauge"/></svg></div>
-        <h3>TG-142 MLC Leaf-Speed</h3>
-        <p>Log-based leaf-speed analysis — per-leaf RMS error, beam holds, and combined batch reports, with no portal dosimetry required.</p>
-      </div>
+      <a class="prod-card" href="quikshare.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-lock"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikShare</h3>
+        <p>HIPAA-conscious, AES-256 encrypted DICOM transfer with OneDrive delivery and a full audit trail.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-calc"/></svg></div>
-        <h3>TG-51 Dosimetry</h3>
-        <p>Photon and electron reference dosimetry with full chamber and electrometer catalogs.</p>
-      </div>
+      <a class="prod-card" href="quikshield.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-shield"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikShield</h3>
+        <p>NCRP 151 radiation shielding design for megavoltage therapy vaults, with fully cited, clinic-ready reports.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
-      <div class="feature">
-        <div class="feat-icon"><svg class="ic"><use href="#i-doc"/></svg></div>
-        <h3>DICOM Anonymizer &amp; PDF Tools</h3>
-        <p>Strip identifying tags to share test data safely, then merge, split, rotate, watermark, and number QA reports.</p>
-      </div>
+      <a class="prod-card" href="quikref.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-search"/></svg></div>
+        <div class="card-tag">Local Web App</div>
+        <h3>Radiant QuikRef</h3>
+        <p>Ask one question, get a synthesized answer across federal, state, and society radiation guidance — every claim cited.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
+
+      <a class="prod-card" href="quikcare.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-doc"/></svg></div>
+        <div class="card-tag">Local Web App</div>
+        <h3>Radiant QuikCARE</h3>
+        <p>Generates personalized, physician-signed radiation therapy patient education packets in seconds.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
 
     </div>
   </div>
 </section>
 
-<!-- ===== Who it's for ===== -->
+<!-- ===== Contractor Tools ===== -->
 <section class="section alt">
   <div class="section-inner">
     <div class="section-head">
-      <div class="section-kicker"><svg class="ic"><use href="#i-users"/></svg><span>Who It's For</span></div>
-      <h2>Made for the QA workstation.</h2>
+      <div class="section-kicker"><svg class="ic"><use href="#i-chart"/></svg><span>Contractor Tools</span></div>
+      <h2>Built for the business.</h2>
+      <p>The back-office side of independent practice — bookkeeping and payroll that stay entirely on your own machine, with no cloud and no subscription.</p>
     </div>
-    <div class="who-grid">
-      <div class="who-copy">
-        <p>QuikQA is built for the clinical medical physicist responsible for linear-accelerator commissioning and routine quality assurance. It consolidates the monthly and annual machine-QA workflow — Winston-Lutz, Picket Fence, VMAT, MLC leaf-speed, and TG-51 reference dosimetry — into a single tool that runs from one <code>.exe</code> on any Windows QA workstation.</p>
-        <p>Because it ships as a standalone executable with no Python install and no ESAPI dependency, it drops cleanly into a physics workflow without IT involvement. QuikQA is distributed as an evaluation build, so every tolerance and output must be reviewed and approved by a Qualified Medical Physicist before operational use.</p>
-      </div>
-      <div class="who-card">
-        <div class="feat-icon"><svg class="ic"><use href="#i-users"/></svg></div>
-        <h3>Best fit for</h3>
-        <ul>
-          <li>Clinical &amp; QA medical physicists</li>
-          <li>Linac commissioning teams</li>
-          <li>Monthly and annual machine QA</li>
-          <li>Physics residents and students</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="card-grid">
 
-<!-- ===== Testimonial ===== -->
-<section class="section">
-  <div class="section-inner">
-    <div class="quote-card">
-      <svg class="ic q-mark"><use href="#i-quote"/></svg>
-      <p class="quote-text">A short, specific quote from a physicist who has run QuikQA in their QA program will appear here.</p>
-      <p class="quote-meta">— Name, Title · Institution</p>
-      <p class="quote-ph">Testimonial placeholder — used QuikQA? Share your experience at info@Radiant-MPC.com</p>
+      <a class="prod-card" href="quikflow.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-chart"/></svg></div>
+        <div class="card-tag">Installable PWA</div>
+        <h3>Radiant QuikFlow</h3>
+        <p>Income, expense, mileage, and P&amp;L tracking for the single-member consulting LLC — offline-first and installable.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
+
+      <a class="prod-card" href="quikpay.html">
+        <div class="card-icon"><svg class="ic"><use href="#i-dollar"/></svg></div>
+        <div class="card-tag">Windows Desktop</div>
+        <h3>Radiant QuikPay</h3>
+        <p>100% local payroll for the small consulting LLC — withholding, employer taxes, W-2s, and owner draws, no cloud.</p>
+        <span class="card-link">Learn More <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+      </a>
+
     </div>
   </div>
 </section>
 
 <!-- ===== CTA ===== -->
 <section class="cta-band">
-  <h2>See QuikQA in your QA program</h2>
-  <p>Request a walkthrough tailored to your machines and QA cadence — no obligation.</p>
+  <h2>Don't see your workflow?</h2>
+  <p>Radiant builds tools to fit clinical and consulting workflows that off-the-shelf software doesn't address. If it wastes physicist time, it's probably worth automating.</p>
   <div class="cta-actions">
-    <a class="btn btn-primary" href="mailto:info@Radiant-MPC.com?subject=Demo%20request%3A%20Radiant%20QuikQA"><svg class="ic"><use href="#i-mail"/></svg> Request a Demo</a>
-    <a class="btn btn-ghost" href="products.html"><svg class="ic"><use href="#i-arrow-left"/></svg> All Products</a>
+    <a class="btn btn-primary" href="mailto:info@Radiant-MPC.com?subject=Radiant%20Software%20Suite%20enquiry"><svg class="ic"><use href="#i-mail"/></svg> Request a Demo</a>
+    <a class="btn btn-ghost" href="contact.html">Get in touch</a>
   </div>
 </section>
 
