@@ -58,32 +58,8 @@ export default {
       }
     }
 
-    // Everything else: static assets. Marketing pages get the site-wide
-    // customer-login control injected (see /customer-login.js).
-    const assetResponse = await env.ASSETS.fetch(request);
-    try {
-      const ctype = assetResponse.headers.get("content-type") || "";
-      const p = url.pathname;
-      const skipInject =
-        p.startsWith("/admin/") ||
-        p.startsWith("/portal/") ||
-        p.startsWith("/apps/");
-      if (ctype.includes("text/html") && !skipInject) {
-        return new HTMLRewriter()
-          .on("body", {
-            element(el) {
-              el.append(
-                '<script src="/customer-login.js" defer></script>',
-                { html: true }
-              );
-            },
-          })
-          .transform(assetResponse);
-      }
-    } catch (err) {
-      // If injection fails, serve the untouched asset.
-    }
-    return assetResponse;
+    // Everything else: static assets.
+    return env.ASSETS.fetch(request);
   },
 };
 

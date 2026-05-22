@@ -8,6 +8,8 @@
  */
 (function () {
   "use strict";
+  if (window.__radiantCustomerLogin) return;
+  window.__radiantCustomerLogin = true;
 
   var STYLE = [
     ".cl-wrap{display:flex;align-items:center;margin-right:auto;margin-left:24px}",
