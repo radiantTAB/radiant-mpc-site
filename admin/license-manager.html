@@ -184,6 +184,11 @@ img{max-width:100%;display:block}
           <svg class="ic"><use href="#i-copy"/></svg> Copy key
         </button>
       </div>
+
+      <div style="margin-top:26px;padding-top:22px;border-top:1px solid var(--line)">
+        <div style="font-size:14px;color:var(--text-mute);margin-bottom:14px">Need full access for testing &amp; training? Issue yourself a master key &mdash; every module, valid 10 years &mdash; then use it to unlock any Radiant app.</div>
+        <button type="button" class="btn btn-ghost" id="masterBtn"><svg class="ic"><use href="#i-key"/></svg> Issue Admin Master Key</button>
+      </div>
     </div>
 
     <!-- Issued keys -->
@@ -335,6 +340,30 @@ document.getElementById('copyBtn').addEventListener('click', function(){
   ta.select();
   if (navigator.clipboard){ navigator.clipboard.writeText(ta.value); }
   else { document.execCommand('copy'); }
+});
+
+document.getElementById('masterBtn').addEventListener('click', async function(){
+  if (!confirm('Issue an admin master key?\n\nIt unlocks every Radiant module and is valid for 10 years. Keep it private — anyone who has it gets full access to every app.')) return;
+  var btn = this;
+  showMsg('', true);
+  var prods = Array.prototype.map.call(
+    document.querySelectorAll('input[name=product]'), function(c){ return c.value; }
+  );
+  if (!prods.length){ showMsg('Products are still loading — try again in a moment.', false); return; }
+  btn.disabled = true;
+  try {
+    var data = await api('/admin/api/licenses', {
+      method:'POST', headers:{'content-type':'application/json'},
+      body: JSON.stringify({ customer:'Radiant Admin - Testing & Training', days:3650, products:prods })
+    });
+    showResult(data.license, 'Admin master key');
+    showMsg('Admin master key issued — every module, valid 10 years.', true);
+    loadLicenses();
+  } catch (err) {
+    showMsg(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 loadProducts();
