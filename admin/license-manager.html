@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>License Manager — Radiant Admin Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg-elev:#fafafa;--bg-card:#f4f4f5;
+  --line:#e6e6e8;--line-hi:#cdcdd1;
+  --text:#1a1a1a;--text-mute:#5a5a5a;--text-dim:#8a8a8a;
+  --accent:#d00008;--accent-2:#a80006;--accent-bright:#f03020;--accent-warm:#f86058;
+  --ok:#1a7f37;
+  --font-display:'Montserrat',system-ui,sans-serif;
+  --font-body:'Montserrat',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --max-w:1180px;--pad-x:clamp(20px,5vw,64px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(208,0,8,.035) 1px,transparent 0);background-size:32px 32px;pointer-events:none;z-index:0}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-bright)}
+img{max-width:100%;display:block}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad-x);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand-logo{height:160px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{color:var(--text-mute);font-size:14px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{padding:9px 18px;border:1px solid var(--line-hi);border-radius:999px;color:var(--text)!important}
+.nav-cta:hover{border-color:var(--accent);color:var(--accent)!important;background:rgba(208,0,8,.06)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;font-family:var(--font-body);font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;transition:all .2s;border:1px solid transparent;cursor:pointer}
+.btn .ic{width:17px;height:17px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-2);color:#fff}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-ghost{color:var(--text);border-color:var(--line-hi);background:none}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Hero */
+.hub-hero-band{position:relative;z-index:2;background:var(--bg-elev);border-bottom:1px solid var(--line)}
+.hub-hero{max-width:var(--max-w);margin:0 auto;padding:54px var(--pad-x) 48px}
+.crumb{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:18px}
+.crumb a{color:var(--text-mute)}
+.hub-hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(32px,5vw,48px);line-height:1.05;letter-spacing:-.025em}
+.hub-hero p{font-size:18px;color:var(--text-mute);margin-top:12px;max-width:640px}
+
+/* Layout */
+.section{padding:48px var(--pad-x) 80px;position:relative;z-index:2}
+.section-inner{max-width:var(--max-w);margin:0 auto}
+.note{border:1px solid var(--line);border-left:3px solid var(--accent-warm);background:var(--bg-elev);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;margin-bottom:32px}
+.note .ic{width:22px;height:22px;color:var(--accent-warm);margin-top:1px}
+.note p{font-size:14px;color:var(--text-mute);margin:0}
+.lm-card{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--accent);padding:30px;margin-bottom:32px}
+.lm-card>h2{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+.lm-card>.sub{font-size:14px;color:var(--text-mute);margin-bottom:24px}
+
+/* Form */
+.field{margin-bottom:20px}
+.field>label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-mute);margin-bottom:8px}
+.field input[type=text],.field input[type=number]{width:100%;max-width:440px;font-family:var(--font-body);font-size:15px;padding:11px 14px;border:1px solid var(--line-hi);border-radius:8px;background:var(--bg-elev);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--accent);background:var(--bg)}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;max-width:600px}
+.check{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--text);cursor:pointer}
+.check input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.msg{margin-top:14px;font-size:14px;font-weight:600;min-height:18px}
+.msg-ok{color:var(--ok)}
+.msg-err{color:var(--accent)}
+.muted{color:var(--text-dim);font-size:14px}
+
+/* Issued-key result */
+.result{margin-top:26px;border:1px solid var(--line);border-left:3px solid var(--ok);background:var(--bg-elev);padding:22px 24px}
+.result h3{font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:6px}
+.result .meta{font-size:13px;color:var(--text-mute);margin-bottom:12px}
+.result textarea{width:100%;font-family:var(--font-mono);font-size:12.5px;line-height:1.5;padding:12px;border:1px solid var(--line-hi);border-radius:8px;background:var(--bg);color:var(--text);resize:vertical;margin-bottom:12px}
+
+/* Table */
+.table-wrap{overflow-x:auto}
+.lic-table{width:100%;border-collapse:collapse;font-size:14px}
+.lic-table th{text-align:left;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);padding:10px 12px;border-bottom:1px solid var(--line-hi);white-space:nowrap}
+.lic-table td{padding:12px;border-bottom:1px solid var(--line);color:var(--text-mute);vertical-align:top}
+.badge{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.badge-ok{background:rgba(26,127,55,.1);color:var(--ok)}
+.badge-exp{background:rgba(208,0,8,.08);color:var(--accent)}
+
+/* Footer */
+.footer{padding:40px var(--pad-x);border-top:1px solid var(--line);background:var(--bg-elev);position:relative;z-index:2;font-size:13px;color:var(--text-dim);text-align:center}
+
+@media(max-width:720px){
+  .nav-links{gap:16px}
+  .nav-links a:not(.nav-cta){display:none}
+  .brand-logo{height:96px}
+}
+</style>
+</head>
+<body>
+
+<svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3"/><path d="M16 5l3 3"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M11 6h10"/><path d="M11 12h10"/><path d="M11 18h10"/><path d="M3 6l1.5 1.5L7 5"/><path d="M3 12l1.5 1.5L7 11"/><path d="M3 18l1.5 1.5L7 17"/></symbol>
+</svg>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="../index.html" class="brand" aria-label="Radiant Medical Physics Consulting LLC">
+    <img src="../radiant-logo.png" alt="Radiant Medical Physics Consulting LLC" class="brand-logo">
+  </a>
+  <div class="nav-links">
+    <a href="../services.html">Services</a>
+    <a href="../products.html">Products</a>
+    <a href="../about.html">About</a>
+    <a href="index.html" class="active">Admin</a>
+    <a href="../contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hub-hero-band">
+  <div class="hub-hero">
+    <div class="crumb"><a href="index.html">Admin Workspace</a> / License Manager</div>
+    <h1>License Manager</h1>
+    <p>Issue signed, time-limited Radiant license keys and track every key issued.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="section-inner">
+
+    <div class="note">
+      <svg class="ic"><use href="#i-lock"/></svg>
+      <p>Keys issued here are <strong>real, cryptographically signed Radiant license keys</strong>. They are stored and will activate Radiant apps. This page must stay behind the admin login (Cloudflare Access).</p>
+    </div>
+
+    <!-- Issue a license -->
+    <div class="lm-card">
+      <h2>Issue a license</h2>
+      <div class="sub">Enter the customer, a trial length, and the products this key unlocks.</div>
+
+      <form id="issueForm" autocomplete="off">
+        <div class="field">
+          <label for="customer">Customer / organization</label>
+          <input type="text" id="customer" required placeholder="e.g. Acme Radiation Oncology">
+        </div>
+        <div class="field">
+          <label for="days">Trial length (days)</label>
+          <input type="number" id="days" min="1" value="30" required>
+        </div>
+        <div class="field">
+          <label>Products this key unlocks</label>
+          <div class="checks" id="productChecks"><span class="muted">Loading products…</span></div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="issueBtn">
+          <svg class="ic"><use href="#i-key"/></svg> Issue License Key
+        </button>
+        <div class="msg" id="formMsg" role="status"></div>
+      </form>
+
+      <div class="result" id="result" hidden>
+        <h3>New license key</h3>
+        <div class="meta" id="resultMeta"></div>
+        <textarea id="resultKey" readonly rows="4" aria-label="Issued license key"></textarea>
+        <button type="button" class="btn btn-ghost" id="copyBtn">
+          <svg class="ic"><use href="#i-copy"/></svg> Copy key
+        </button>
+      </div>
+    </div>
+
+    <!-- Issued keys -->
+    <div class="lm-card">
+      <h2>Issued keys</h2>
+      <div class="sub">Every key issued from this workspace.</div>
+      <div class="table-wrap">
+        <table class="lic-table">
+          <thead>
+            <tr><th>Customer</th><th>Issued</th><th>Expires</th><th>Status</th><th>Products</th></tr>
+          </thead>
+          <tbody id="licBody">
+            <tr><td colspan="5" class="muted">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">© 2026 Radiant Medical Physics Consulting LLC · Admin</footer>
+
+<script>
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+async function api(path, opts){
+  const res = await fetch(path, opts);
+  let data = {};
+  try { data = await res.json(); } catch (e) {}
+  if (!res.ok) throw new Error(data.error || ('Request failed (' + res.status + ')'));
+  return data;
+}
+
+function showMsg(text, ok){
+  const el = document.getElementById('formMsg');
+  el.textContent = text;
+  el.className = 'msg ' + (ok ? 'msg-ok' : 'msg-err');
+}
+
+async function loadProducts(){
+  const wrap = document.getElementById('productChecks');
+  try {
+    const data = await api('/admin/api/products');
+    wrap.innerHTML = data.products.map(function(p){
+      return '<label class="check"><input type="checkbox" name="product" value="' +
+        esc(p.id) + '"> ' + esc(p.name) + '</label>';
+    }).join('');
+  } catch (e) {
+    wrap.innerHTML = '<span class="muted">Could not load products — ' + esc(e.message) + '</span>';
+  }
+}
+
+async function loadLicenses(){
+  const body = document.getElementById('licBody');
+  try {
+    const data = await api('/admin/api/licenses');
+    if (!data.licenses.length){
+      body.innerHTML = '<tr><td colspan="5" class="muted">No keys issued yet.</td></tr>';
+      return;
+    }
+    body.innerHTML = data.licenses.map(function(l){
+      const badge = l.status === 'Active'
+        ? '<span class="badge badge-ok">Active</span>'
+        : '<span class="badge badge-exp">Expired</span>';
+      return '<tr><td>' + esc(l.customer) + '</td><td>' + esc(l.issued) +
+        '</td><td>' + esc(l.expires) + '</td><td>' + badge + '</td><td>' +
+        l.products.map(esc).join(', ') + '</td></tr>';
+    }).join('');
+  } catch (e) {
+    body.innerHTML = '<tr><td colspan="5" class="muted">Could not load keys — ' + esc(e.message) + '</td></tr>';
+  }
+}
+
+function showResult(license){
+  document.getElementById('result').hidden = false;
+  document.getElementById('resultMeta').textContent =
+    license.customer + '  ·  ' + license.issued + '  →  ' + license.expires +
+    '  ·  ' + license.product_names.join(', ');
+  document.getElementById('resultKey').value = license.key;
+  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+document.getElementById('issueForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  showMsg('', true);
+  const btn = document.getElementById('issueBtn');
+  const customer = document.getElementById('customer').value.trim();
+  const days = parseInt(document.getElementById('days').value, 10);
+  const products = Array.prototype.map.call(
+    document.querySelectorAll('input[name=product]:checked'), function(c){ return c.value; }
+  );
+  if (!customer){ showMsg('Enter a customer name.', false); return; }
+  if (!(days >= 1)){ showMsg('Trial length must be at least 1 day.', false); return; }
+  if (!products.length){ showMsg('Select at least one product.', false); return; }
+
+  btn.disabled = true;
+  try {
+    const data = await api('/admin/api/licenses', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ customer: customer, days: days, products: products })
+    });
+    showResult(data.license);
+    showMsg('Key issued for ' + data.license.customer + '.', true);
+    document.getElementById('issueForm').reset();
+    document.getElementById('days').value = 30;
+    document.querySelectorAll('input[name=product]:checked').forEach(function(c){ c.checked = false; });
+    loadLicenses();
+  } catch (err) {
+    showMsg(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('copyBtn').addEventListener('click', function(){
+  const ta = document.getElementById('resultKey');
+  ta.select();
+  if (navigator.clipboard){ navigator.clipboard.writeText(ta.value); }
+  else { document.execCommand('copy'); }
+});
+
+loadProducts();
+loadLicenses();
+</script>
+
+</body>
+</html>

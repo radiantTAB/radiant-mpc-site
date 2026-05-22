@@ -1,0 +1,7 @@
+# Files in this repo that must NOT be served as public static assets.
+worker
+wrangler.jsonc
+schema.sql
+.assetsignore
+.gitignore
+README.md

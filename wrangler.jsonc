@@ -1,0 +1,27 @@
+{
+  // Cloudflare Worker configuration for radiant-mpc.com.
+  // This repo is deployed by the Git-connected Worker "radiant-mpc-site".
+  // It serves the static marketing site AND the License Manager backend.
+  "name": "radiant-mpc-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2025-09-01",
+
+  // Serve every file in the repo as a static asset, except the backend
+  // source listed in .assetsignore. The Worker script handles /admin/api/*
+  // and falls through to these assets for everything else.
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+
+  // D1 database for the License Manager.
+  // database_id is filled in after the database is created in the
+  // Cloudflare dashboard (Storage & databases -> D1).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "radiant-licenses",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ]
+}
