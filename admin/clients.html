@@ -348,6 +348,12 @@ function renderClients(){
         '<div><div class="client-name">' + esc(c.name) + '</div>' +
           (c.contact_email ? '<div class="client-sub">' + esc(c.contact_email) + '</div>' : '') +
           (c.notes ? '<div class="client-sub">' + esc(c.notes) + '</div>' : '') +
+          '<div class="client-sub">Portal login: ' +
+            (c.has_login ? '<strong>enabled</strong>' : 'not set') + ' ' +
+            '<button class="rowbtn" onclick="setPassword(\'' + c.id + '\')">' +
+              (c.has_login ? 'Change password' : 'Set password') + '</button>' +
+            (c.has_login ? '<button class="rowbtn" onclick="clearPassword(\'' + c.id + '\')">Disable</button>' : '') +
+          '</div>' +
         '</div>' +
         '<button class="rowbtn rowbtn-danger" onclick="deleteClient(\'' + c.id + '\')">Delete client</button>' +
       '</div>' +
@@ -387,6 +393,33 @@ async function deleteClient(id){
   if (!confirm('Delete client "' + (c ? c.name : '') + '" and all its locations?\n\nIssued keys are kept, but lose their link to this client.')) return;
   try { await api('/admin/api/clients/' + encodeURIComponent(id), {method:'DELETE'}); loadClients(); }
   catch (e) { alert('Could not delete: ' + e.message); }
+}
+
+async function setPassword(id){
+  var c = findClient(id);
+  if (c && !c.contact_email){
+    alert('Add a contact email for this client first — that email is their portal login.');
+    return;
+  }
+  var pw = prompt('Set a portal password for ' + (c ? c.name : 'this client') + '.\n\nThey sign in at radiant-mpc.com/portal/ with their contact email and this password.');
+  if (pw === null) return;
+  pw = pw.trim();
+  if (pw.length < 6){ alert('Password must be at least 6 characters.'); return; }
+  try {
+    await api('/admin/api/clients/' + encodeURIComponent(id) + '/password',
+      {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({password:pw})});
+    loadClients();
+  } catch (e) { alert('Could not set password: ' + e.message); }
+}
+
+async function clearPassword(id){
+  var c = findClient(id);
+  if (!confirm('Disable the portal login for ' + (c ? c.name : 'this client') + '?')) return;
+  try {
+    await api('/admin/api/clients/' + encodeURIComponent(id) + '/password',
+      {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({password:''})});
+    loadClients();
+  } catch (e) { alert('Could not disable login: ' + e.message); }
 }
 
 async function addLocation(clientId){

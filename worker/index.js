@@ -13,6 +13,7 @@
 import { signLicense } from "./license-core.js";
 import { RADIANT_PRODUCTS, PRODUCT_IDS, PRODUCT_NAMES } from "./products.js";
 import { handleClientsApi } from "./clients.js";
+import { handlePortalApi } from "./portal.js";
 
 export default {
   async fetch(request, env) {
@@ -22,6 +23,15 @@ export default {
     if (url.pathname === "/api/revoked") {
       try {
         return await handleRevokedList(env);
+      } catch (err) {
+        return json({ error: String((err && err.message) || err) }, 500);
+      }
+    }
+
+    // Client portal API — public-facing, with its own session auth.
+    if (url.pathname.startsWith("/portal/api/")) {
+      try {
+        return await handlePortalApi(request, env, url);
       } catch (err) {
         return json({ error: String((err && err.message) || err) }, 500);
       }

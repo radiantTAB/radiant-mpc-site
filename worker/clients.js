@@ -9,6 +9,7 @@
 
 import { signLicense } from "./license-core.js";
 import { PRODUCT_IDS, PRODUCT_NAMES } from "./products.js";
+import { hashPassword } from "./portal.js";
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -97,6 +98,7 @@ export async function handleClientsApi(request, env, url) {
         name: c.name,
         contact_email: c.contact_email || "",
         notes: c.notes || "",
+        has_login: !!c.password_hash,
         locations: locsByClient[c.id] || [],
       })),
     });
@@ -128,6 +130,28 @@ export async function handleClientsApi(request, env, url) {
     await env.DB.prepare("DELETE FROM locations WHERE client_id = ?").bind(m[1]).run();
     await env.DB.prepare("DELETE FROM clients WHERE id = ?").bind(m[1]).run();
     return json({ ok: true });
+  }
+
+  // ---- POST /admin/api/clients/<id>/password : set or clear portal login ----
+  m = path.match(/^\/admin\/api\/clients\/([^/]+)\/password$/);
+  if (m && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const password = String(body.password || "");
+    let hash = null;
+    if (password) {
+      if (password.length < 6) {
+        return json({ error: "Password must be at least 6 characters." }, 400);
+      }
+      hash = await hashPassword(password);
+    }
+    const res = await env.DB.prepare(
+      "UPDATE clients SET password_hash = ? WHERE id = ?"
+    )
+      .bind(hash, m[1])
+      .run();
+    if (res && res.meta && res.meta.changes === 0)
+      return json({ error: "Client not found." }, 404);
+    return json({ ok: true, has_login: !!hash });
   }
 
   // ---- POST /admin/api/clients/<id>/locations : add a location ----

@@ -1,4 +1,5 @@
--- D1 schema for the Radiant admin workspace (License Manager + Client Setup).
+-- D1 schema for the Radiant admin workspace
+-- (License Manager, Client Setup, Client Portal).
 
 -- ============================================================
 -- FRESH DATABASE — run all of this once in the D1 "Console".
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS clients (
   name          TEXT NOT NULL,
   contact_email TEXT,
   notes         TEXT,
+  password_hash TEXT,
   created_at    TEXT NOT NULL
 );
 
@@ -34,13 +36,23 @@ CREATE TABLE IF NOT EXISTS locations (
   created_at  TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS portal_sessions (
+  token       TEXT PRIMARY KEY,
+  client_id   TEXT NOT NULL,
+  created_at  TEXT NOT NULL,
+  expires_at  TEXT NOT NULL
+);
+
 -- ============================================================
 -- EXISTING DATABASE — upgrade steps. Run only what you have not
 -- run before.
---   Revocation update (previous):
+--   Revocation update:
 --     ALTER TABLE licenses ADD COLUMN revoked INTEGER NOT NULL DEFAULT 0;
 --     ALTER TABLE licenses ADD COLUMN revoked_at TEXT;
---   Client Setup update (this one):
+--   Client Setup update:
 --     ALTER TABLE licenses ADD COLUMN location_id TEXT;
---     ...plus the CREATE TABLE clients and CREATE TABLE locations above.
+--     ...plus CREATE TABLE clients and CREATE TABLE locations above.
+--   Client Portal update:
+--     ALTER TABLE clients ADD COLUMN password_hash TEXT;
+--     ...plus CREATE TABLE portal_sessions above.
 -- ============================================================
