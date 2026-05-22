@@ -10,20 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
   ===================================================================
-  LAUNCH PORTAL — placeholder app URLs
-  The "Launch" buttons below point to per-app subdomains that are NOT
-  yet live. Once each app is hosted (see option A / app deployment),
-  update the matching href:
-     quikqa     -> https://quikqa.radiant-mpc.com/
-     quikbolus  -> https://quikbolus.radiant-mpc.com/
-     quikcalc   -> https://quikcalc.radiant-mpc.com/
-     quikshare  -> https://quikshare.radiant-mpc.com/
-     quikshield -> https://quikshield.radiant-mpc.com/
-     quikref    -> https://quikref.radiant-mpc.com/
-     quikcare   -> https://quikcare.radiant-mpc.com/
-     quikflow   -> https://quikflow.radiant-mpc.com/
-     quikpay    -> https://quikpay.radiant-mpc.com/
-  Each app enforces its own license gate, so no auth logic is needed here.
+  LAUNCH PORTAL
+  The Radiant Quik apps are currently standalone Windows programs, not
+  hosted web apps, so the "Launch ... · Soon" buttons below are disabled
+  placeholders. When an app is published as a hosted web app, swap its
+  <span> back to a link, e.g.:
+     <a class="btn btn-primary" href="https://quikqa.radiant-mpc.com/">...
+  NOTE: this page is no longer linked from the product pages. It can be
+  repurposed as a downloads hub or removed.
   ===================================================================
 -->
 <style>
@@ -164,7 +158,7 @@ img{max-width:100%;display:block}
     <a href="services.html">Services</a>
     <a href="products.html">Products</a>
     <a href="about.html">About</a>
-    <a href="license-manager.html">License Manager</a>
+    <a href="admin/index.html">Admin</a>
     <a href="contact.html" class="nav-cta">Contact</a>
   </div>
 </nav>
@@ -200,7 +194,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikQA</h3>
         <p>PyLinac-powered linac QA &mdash; Winston-Lutz, Picket Fence, VMAT, leaf-speed, and TG-51 dosimetry in one local web app.</p>
-        <a class="btn btn-primary" href="https://quikqa.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikQA</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikQA · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikbolus">
@@ -208,7 +202,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikBolus</h3>
         <p>Turns a DICOM RT Structure Set into a watertight, 3D-printable bolus STL &mdash; no CAD step required.</p>
-        <a class="btn btn-primary" href="https://quikbolus.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikBolus</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikBolus · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikcalc">
@@ -216,7 +210,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikCalc</h3>
         <p>Independent MU checks, radiobiology, and treatment-gap math &mdash; each producing a Radiant-branded PDF report.</p>
-        <a class="btn btn-primary" href="https://quikcalc.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikCalc</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikCalc · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikshare">
@@ -224,7 +218,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikShare</h3>
         <p>HIPAA-conscious, AES-256 encrypted DICOM transfer with OneDrive delivery and a full audit trail.</p>
-        <a class="btn btn-primary" href="https://quikshare.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikShare</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikShare · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikshield">
@@ -232,7 +226,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikShield</h3>
         <p>NCRP 151 radiation shielding design for megavoltage therapy vaults, with fully cited, clinic-ready reports.</p>
-        <a class="btn btn-primary" href="https://quikshield.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikShield</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikShield · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikref">
@@ -240,7 +234,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikRef</h3>
         <p>Ask one question, get a synthesized answer across federal, state, and society radiation guidance &mdash; every claim cited.</p>
-        <a class="btn btn-primary" href="https://quikref.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikRef</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikRef · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikcare">
@@ -248,7 +242,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikCARE</h3>
         <p>Generates personalized, physician-signed radiation therapy patient education packets in seconds.</p>
-        <a class="btn btn-primary" href="https://quikcare.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikCARE</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikCARE · Soon</span>
       </div>
 
     </div>
@@ -271,7 +265,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikFlow</h3>
         <p>Income, expense, mileage, and P&amp;L tracking for the single-member consulting LLC &mdash; offline-first and installable.</p>
-        <a class="btn btn-primary" href="https://quikflow.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikFlow</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikFlow · Soon</span>
       </div>
 
       <div class="prod-card app-card" id="quikpay">
@@ -279,7 +273,7 @@ img{max-width:100%;display:block}
         <div class="app-meta"><span class="lic-dot"></span><span>License required</span></div>
         <h3>Radiant QuikPay</h3>
         <p>100% local payroll for the small consulting LLC &mdash; withholding, employer taxes, W-2s, and owner draws, no cloud.</p>
-        <a class="btn btn-primary" href="https://quikpay.radiant-mpc.com/"><svg class="ic"><use href="#i-app"/></svg> Launch QuikPay</a>
+        <span class="btn btn-ghost" aria-disabled="true" title="Hosted web app coming soon" style="opacity:.5;cursor:not-allowed"><svg class="ic"><use href="#i-app"/></svg> Launch QuikPay · Soon</span>
       </div>
 
     </div>
