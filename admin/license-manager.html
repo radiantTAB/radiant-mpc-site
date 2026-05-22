@@ -96,6 +96,11 @@ img{max-width:100%;display:block}
 .badge{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:3px 9px;border-radius:999px;white-space:nowrap}
 .badge-ok{background:rgba(26,127,55,.1);color:var(--ok)}
 .badge-exp{background:rgba(208,0,8,.08);color:var(--accent)}
+.badge-rev{background:rgba(90,90,90,.16);color:#5a5a5a}
+.actions{white-space:nowrap}
+.rowbtn{font-family:var(--font-body);font-size:12px;font-weight:600;padding:6px 11px;margin-right:4px;border:1px solid var(--line-hi);border-radius:6px;background:var(--bg);color:var(--text-mute);cursor:pointer;transition:all .15s}
+.rowbtn:hover{border-color:var(--accent);color:var(--accent)}
+.rowbtn-danger:hover{border-color:var(--accent);background:var(--accent);color:#fff}
 
 /* Footer */
 .footer{padding:40px var(--pad-x);border-top:1px solid var(--line);background:var(--bg-elev);position:relative;z-index:2;font-size:13px;color:var(--text-dim);text-align:center}
@@ -172,7 +177,7 @@ img{max-width:100%;display:block}
       </form>
 
       <div class="result" id="result" hidden>
-        <h3>New license key</h3>
+        <h3 id="resultTitle">New license key</h3>
         <div class="meta" id="resultMeta"></div>
         <textarea id="resultKey" readonly rows="4" aria-label="Issued license key"></textarea>
         <button type="button" class="btn btn-ghost" id="copyBtn">
@@ -188,10 +193,10 @@ img{max-width:100%;display:block}
       <div class="table-wrap">
         <table class="lic-table">
           <thead>
-            <tr><th>Customer</th><th>Issued</th><th>Expires</th><th>Status</th><th>Products</th></tr>
+            <tr><th>Customer</th><th>Issued</th><th>Expires</th><th>Status</th><th>Products</th><th>Actions</th></tr>
           </thead>
           <tbody id="licBody">
-            <tr><td colspan="5" class="muted">Loading…</td></tr>
+            <tr><td colspan="6" class="muted">Loading…</td></tr>
           </tbody>
         </table>
       </div>
@@ -232,34 +237,64 @@ async function loadProducts(){
   }
 }
 
+var licensesById = {};
+
 async function loadLicenses(){
   const body = document.getElementById('licBody');
   try {
     const data = await api('/admin/api/licenses');
+    licensesById = {};
+    data.licenses.forEach(function(l){ licensesById[l.id] = l; });
     if (!data.licenses.length){
-      body.innerHTML = '<tr><td colspan="5" class="muted">No keys issued yet.</td></tr>';
+      body.innerHTML = '<tr><td colspan="6" class="muted">No keys issued yet.</td></tr>';
       return;
     }
     body.innerHTML = data.licenses.map(function(l){
-      const badge = l.status === 'Active'
-        ? '<span class="badge badge-ok">Active</span>'
-        : '<span class="badge badge-exp">Expired</span>';
+      var cls = l.status === 'Active' ? 'badge-ok' : (l.status === 'Revoked' ? 'badge-rev' : 'badge-exp');
+      var badge = '<span class="badge ' + cls + '">' + esc(l.status) + '</span>';
+      var revBtn = l.revoked
+        ? '<button class="rowbtn" onclick="revokeKey(\'' + esc(l.id) + '\',false)">Restore</button>'
+        : '<button class="rowbtn rowbtn-danger" onclick="revokeKey(\'' + esc(l.id) + '\',true)">Revoke</button>';
+      var actions = '<button class="rowbtn" onclick="viewKey(\'' + esc(l.id) + '\')">View key</button>' + revBtn;
       return '<tr><td>' + esc(l.customer) + '</td><td>' + esc(l.issued) +
         '</td><td>' + esc(l.expires) + '</td><td>' + badge + '</td><td>' +
-        l.products.map(esc).join(', ') + '</td></tr>';
+        l.products.map(esc).join(', ') + '</td><td class="actions">' + actions + '</td></tr>';
     }).join('');
   } catch (e) {
-    body.innerHTML = '<tr><td colspan="5" class="muted">Could not load keys — ' + esc(e.message) + '</td></tr>';
+    body.innerHTML = '<tr><td colspan="6" class="muted">Could not load keys — ' + esc(e.message) + '</td></tr>';
   }
 }
 
-function showResult(license){
+function showResult(license, title){
+  document.getElementById('resultTitle').textContent = title || 'License key';
   document.getElementById('result').hidden = false;
+  var prods = license.product_names || license.products || [];
   document.getElementById('resultMeta').textContent =
     license.customer + '  ·  ' + license.issued + '  →  ' + license.expires +
-    '  ·  ' + license.product_names.join(', ');
+    '  ·  ' + prods.join(', ');
   document.getElementById('resultKey').value = license.key;
   document.getElementById('result').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function viewKey(id){
+  var l = licensesById[id];
+  if (l) showResult(l, 'License key — ' + l.customer);
+}
+
+async function revokeKey(id, revoke){
+  var l = licensesById[id];
+  var who = l ? l.customer : 'this key';
+  if (revoke){
+    if (!confirm('Revoke the key for ' + who + '?\n\nIt will be added to the revocation list. Installed Radiant apps keep accepting it until they are updated to check that list.')) return;
+  } else {
+    if (!confirm('Restore (un-revoke) the key for ' + who + '?')) return;
+  }
+  try {
+    await api('/admin/api/licenses/' + encodeURIComponent(id) + '/' + (revoke ? 'revoke' : 'unrevoke'), { method: 'POST' });
+    loadLicenses();
+  } catch (e) {
+    alert('Could not update the key: ' + e.message);
+  }
 }
 
 document.getElementById('issueForm').addEventListener('submit', async function(e){
@@ -282,7 +317,7 @@ document.getElementById('issueForm').addEventListener('submit', async function(e
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ customer: customer, days: days, products: products })
     });
-    showResult(data.license);
+    showResult(data.license, 'New license key');
     showMsg('Key issued for ' + data.license.customer + '.', true);
     document.getElementById('issueForm').reset();
     document.getElementById('days').value = 30;
