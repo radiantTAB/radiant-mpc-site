@@ -8,10 +8,18 @@
 
   // Serve every file in the repo as a static asset, except the backend
   // source listed in .assetsignore. The Worker script handles the APIs
-  // and falls through to these assets for everything else.
+  // and the marketing/app hostname split, then fetches assets via the
+  // binding for whatever path it resolves to.
+  //
+  // run_worker_first MUST be true: without it Cloudflare serves any
+  // matching file at the requested path directly, bypassing the Worker.
+  // That breaks app.radiant-mpc.com routing -- visiting "/" would serve
+  // /index.html (the marketing homepage) instead of letting the Worker
+  // rewrite to /app/index.html (the launcher).
   "assets": {
     "directory": ".",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": true
   },
 
   // D1 database for the License Manager.
