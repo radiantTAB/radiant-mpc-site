@@ -72,7 +72,7 @@ async function verifyPassword(password, stored) {
   return recomputed === stored;
 }
 
-function readCookie(request, name) {
+export function readCookie(request, name) {
   const header = request.headers.get("Cookie") || "";
   for (const part of header.split(";")) {
     const eq = part.indexOf("=");
@@ -87,7 +87,7 @@ function todayISO() {
 }
 
 // Resolve the session cookie to { id, name } for the client, or null.
-async function sessionClient(request, env) {
+export async function sessionClient(request, env) {
   const token = readCookie(request, "portal_session");
   if (!token) return null;
   const row = await env.DB.prepare(

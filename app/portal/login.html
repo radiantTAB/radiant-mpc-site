@@ -79,7 +79,13 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     var data = {};
     try { data = await res.json(); } catch (ex) {}
     if (res.ok) {
-      location.href = '/portal/';
+      // Respect ?next=<path> when the Worker bounced us here. Must be
+      // a same-origin path (starts with "/" and not "//") to block
+      // open-redirect abuse; otherwise fall back to the portal home.
+      var qsNext = new URLSearchParams(location.search).get('next') || '';
+      var safe = (qsNext && qsNext.charAt(0) === '/' &&
+                  qsNext.charAt(1) !== '/') ? qsNext : '/portal/';
+      location.href = safe;
     } else {
       err.textContent = data.error || 'Sign-in failed. Please try again.';
       btn.disabled = false;

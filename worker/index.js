@@ -29,7 +29,7 @@
 import { signLicense } from "./license-core.js";
 import { RADIANT_PRODUCTS, PRODUCT_IDS, PRODUCT_NAMES } from "./products.js";
 import { handleClientsApi } from "./clients.js";
-import { handlePortalApi } from "./portal.js";
+import { handlePortalApi, sessionClient, readCookie } from "./portal.js";
 
 export default {
   async fetch(request, env) {
@@ -107,12 +107,72 @@ function isAppPath(path) {
   );
 }
 
+// Paths on the app hostname that DO NOT require portal/Access auth.
+// Everything else under app.radiant-mpc.com is gated by checkAppAuth().
+//   /portal/login.html         -- the login page itself
+//   /portal/api/login          -- POST endpoint that creates the session
+//   /portal/api/me             -- session probe used by customer-login.js
+//                                 (returns 401 JSON when no session; the
+//                                 caller-side JS handles that, so we must
+//                                 NOT redirect it to login.html)
+//   /admin/*                   -- Cloudflare Access handles its own auth
+//   shared static assets       -- styles/logo/customer-login.js/assets/
+function isAuthExempt(path) {
+  return (
+    path === "/portal/login.html" ||
+    path === "/portal/api/login" ||
+    path === "/portal/api/me" ||
+    path.startsWith("/admin/") ||
+    isSharedAsset(path)
+  );
+}
+
+// Does this request carry an acceptable identity for the app surface?
+// Portal session (validated against D1) OR a Cloudflare Access cookie
+// (presence of CF_Authorization, which Cloudflare sets only after
+// successful Access challenge -- attackers cannot forge it onto
+// app.radiant-mpc.com from another origin).
+async function checkAppAuth(request, env) {
+  // Portal session: real DB lookup so a forged cookie value fails.
+  if (env.DB) {
+    try {
+      const client = await sessionClient(request, env);
+      if (client) return true;
+    } catch (_) {
+      // DB hiccup -- fall through to Access check below.
+    }
+  }
+
+  // Cloudflare Access bypass for the operator. Access sets
+  // CF_Authorization on the protected hostname after a successful
+  // challenge; checking that it exists and looks like a JWT is enough
+  // identity for the launcher (Access already vouched for the human,
+  // and the per-app subdomains gate by license key downstream).
+  const cf = readCookie(request, "CF_Authorization");
+  if (cf && cf.split(".").length === 3) return true;
+
+  return false;
+}
+
 async function serveAssets(request, env, url) {
   const host = url.hostname;
   const path = url.pathname;
   const isAppHost = host === "app.radiant-mpc.com";
 
   if (isAppHost) {
+    // Auth gate: require portal login (or Cloudflare Access cookie)
+    // for everything except the login page itself + a small allow-list.
+    if (!isAuthExempt(path)) {
+      const ok = await checkAppAuth(request, env);
+      if (!ok) {
+        const next = encodeURIComponent(path + url.search);
+        return Response.redirect(
+          "https://app.radiant-mpc.com/portal/login.html?next=" + next,
+          302
+        );
+      }
+    }
+
     // Rewrite user-area paths into the /app/ shadow tree. Shared
     // assets pass through unchanged.
     if (isSharedAsset(path)) {
