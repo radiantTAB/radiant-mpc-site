@@ -239,7 +239,12 @@ async function serveAssets(request, env, url) {
     }
     let newPath;
     if (path === "/" || path === "") {
-      newPath = "/app/index.html";
+      // Rewrite to /app/ (trailing slash, NOT /app/index.html) so
+      // Cloudflare's html_handling serves /app/index.html directly
+      // without first 307'ing index.html -> directory. Without this,
+      // the 307 leaks back to the browser as Location=/app/ -> our
+      // Location-stripper turns that into /, and we self-loop.
+      newPath = "/app/";
     } else if (path.startsWith("/app/")) {
       newPath = path; // already under /app/
     } else {
