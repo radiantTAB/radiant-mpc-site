@@ -219,6 +219,27 @@ export async function handlePortalApi(request, env, url) {
     const client = await sessionClient(request, env);
     if (!client) return json({ error: "Not signed in." }, 401);
 
+    // Phase 2.5.5: include the per-clinic QuikBolus defaults blob (if any)
+    // so the QuikBolus session loader can pick them up. Self-healing
+    // ALTER -- safe to swallow on older DBs without the column.
+    let quikbolusDefaults = null;
+    try {
+      const row = await env.DB.prepare(
+        "SELECT default_quikbolus_settings FROM clients WHERE id = ?"
+      )
+        .bind(client.id)
+        .first();
+      if (row && row.default_quikbolus_settings) {
+        try {
+          quikbolusDefaults = JSON.parse(row.default_quikbolus_settings);
+        } catch (_) {
+          quikbolusDefaults = null;
+        }
+      }
+    } catch (_) {
+      // Column may not exist yet on old DBs; ignore.
+    }
+
     // The client's locations -> their licenses -> the modules/apps.
     const locs =
       (await env.DB.prepare("SELECT id FROM locations WHERE client_id = ?")
@@ -267,7 +288,11 @@ export async function handlePortalApi(request, env, url) {
     const apps = Object.values(byApp).sort((a, b) =>
       a.name.localeCompare(b.name)
     );
-    return json({ client: { name: client.name }, apps: apps });
+    return json({
+      client: { name: client.name },
+      apps: apps,
+      quikbolus_defaults: quikbolusDefaults,
+    });
   }
 
   return json({ error: "Not found." }, 404);

@@ -18,12 +18,18 @@ CREATE TABLE IF NOT EXISTS licenses (
 );
 
 CREATE TABLE IF NOT EXISTS clients (
-  id            TEXT PRIMARY KEY,
-  name          TEXT NOT NULL,
-  contact_email TEXT,
-  notes         TEXT,
-  password_hash TEXT,
-  created_at    TEXT NOT NULL
+  id                         TEXT PRIMARY KEY,
+  name                       TEXT NOT NULL,
+  contact_email              TEXT,
+  notes                      TEXT,
+  password_hash              TEXT,
+  created_at                 TEXT NOT NULL,
+  must_change_password       INTEGER NOT NULL DEFAULT 1,
+  -- Phase 2.5.5 (QuikBolus): per-clinic default settings JSON blob.
+  -- Stores the operator's preferred printer family + model, mold
+  -- params, direct-print params, embossing template. QuikBolus pulls
+  -- this on session start to pre-fill its forms.
+  default_quikbolus_settings TEXT
 );
 
 CREATE TABLE IF NOT EXISTS locations (
@@ -79,4 +85,8 @@ CREATE TABLE IF NOT EXISTS admin_sessions (
 --     ...plus CREATE TABLE admin_users + admin_sessions above.
 --     The Worker also runs these as CREATE IF NOT EXISTS / try-ALTER
 --     on every admin-auth call, so the migration is self-healing.
+--   QuikBolus per-clinic defaults (Phase 2.5.5):
+--     ALTER TABLE clients ADD COLUMN default_quikbolus_settings TEXT;
+--     The Worker also runs this as a try-ALTER on every clients API
+--     call, so the migration is self-healing.
 -- ============================================================

@@ -351,6 +351,9 @@ function renderClients(){
     } else {
       addBlock = '<button class="rowbtn" onclick="startAddLocation(\'' + c.id + '\')">+ Add location</button>';
     }
+    var qbBlock = (editingQuikbolusFor === c.id)
+      ? quikbolusDefaultsForm(c.id)
+      : '<button class="rowbtn" onclick="startEditQuikbolus(\'' + c.id + '\')">Default QuikBolus settings</button>';
     return '<div class="client-card">' +
       '<div class="client-head">' +
         '<div><div class="client-name">' + esc(c.name) + '</div>' +
@@ -361,6 +364,7 @@ function renderClients(){
             '<button class="rowbtn" onclick="setPassword(\'' + c.id + '\')">' +
               (c.has_login ? 'Change password' : 'Set password') + '</button>' +
             (c.has_login ? '<button class="rowbtn" onclick="clearPassword(\'' + c.id + '\')">Disable</button>' : '') +
+            ' ' + qbBlock +
           '</div>' +
         '</div>' +
         '<button class="rowbtn rowbtn-danger" onclick="deleteClient(\'' + c.id + '\')">Delete client</button>' +
@@ -369,6 +373,97 @@ function renderClients(){
       '<div class="add-loc">' + addBlock + '</div>' +
     '</div>';
   }).join('');
+}
+
+// Phase 2.5.5: per-client QuikBolus default-settings panel.
+var editingQuikbolusFor = null;
+var quikbolusCache = {};
+
+function startEditQuikbolus(clientId){
+  editingQuikbolusFor = clientId;
+  editingLocationId = null;
+  addingLocationFor = null;
+  // Lazy-load this client's defaults.
+  api('/admin/api/clients/' + encodeURIComponent(clientId) + '/quikbolus-defaults')
+    .then(function(data){
+      quikbolusCache[clientId] = data.defaults || {};
+      renderClients();
+    })
+    .catch(function(e){
+      alert('Could not load QuikBolus defaults: ' + e.message);
+      editingQuikbolusFor = null;
+      renderClients();
+    });
+  renderClients();
+}
+
+function cancelEditQuikbolus(){ editingQuikbolusFor = null; renderClients(); }
+
+function quikbolusDefaultsForm(clientId){
+  var d = quikbolusCache[clientId] || {};
+  var m = d.mold || {};
+  var dp = d.direct_print || {};
+  function s(k, def){ return d[k] !== undefined && d[k] !== null ? esc(String(d[k])) : (def !== undefined ? esc(def) : ''); }
+  function mn(k, def){ return m[k] !== undefined && m[k] !== null ? m[k] : (def !== undefined ? def : ''); }
+  return '<div style="margin:14px 0;padding:14px;border:1px solid var(--line);background:var(--bg-elev);border-radius:6px;font-size:13px;">' +
+    '<div style="font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:11px;color:var(--text-mute);margin-bottom:10px">' +
+      'Default QuikBolus settings' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 12px">' +
+      '<label>Default printer<br><input id="qb_printer_' + clientId + '" type="text" placeholder="bambu_p1s" value="' + s('default_printer_id') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Default casting material<br><input id="qb_cast_' + clientId + '" type="text" placeholder="flexibolus" value="' + s('default_cast_material') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Default export format<br><input id="qb_fmt_' + clientId + '" type="text" placeholder="3mf_bambu" value="' + s('default_export_format') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>ID text template<br><input id="qb_idt_' + clientId + '" type="text" placeholder="{date}" value="' + s('default_id_text_template') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Wall thickness (mm)<br><input id="qb_wall_' + clientId + '" type="number" step="0.5" value="' + mn('wall_thickness_mm') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Floor thickness (mm)<br><input id="qb_floor_' + clientId + '" type="number" step="0.5" value="' + mn('floor_thickness_mm') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Headroom (mm)<br><input id="qb_head_' + clientId + '" type="number" step="1" value="' + mn('headroom_mm') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Sprue count<br><input id="qb_sc_' + clientId + '" type="number" step="1" value="' + mn('sprue_count') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Vent count<br><input id="qb_vc_' + clientId + '" type="number" step="1" value="' + mn('vent_count') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Peg count<br><input id="qb_pc_' + clientId + '" type="number" step="1" value="' + mn('peg_count') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+      '<label>Draft angle (deg)<br><input id="qb_draft_' + clientId + '" type="number" step="0.5" value="' + mn('draft_angle_deg') + '" style="width:100%;padding:6px 8px;font-size:12px"></label>' +
+    '</div>' +
+    '<div style="margin-top:12px">' +
+      '<button class="rowbtn rowbtn-go" onclick="saveQuikbolusDefaults(\'' + clientId + '\')">Save defaults</button>' +
+      '<button class="rowbtn" onclick="cancelEditQuikbolus()">Cancel</button>' +
+    '</div>' +
+  '</div>';
+}
+
+async function saveQuikbolusDefaults(clientId){
+  function gv(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function gn(id){ var v = gv(id); return v === '' ? null : Number(v); }
+  var payload = {
+    default_printer_id: gv('qb_printer_' + clientId) || null,
+    default_cast_material: gv('qb_cast_' + clientId) || null,
+    default_export_format: gv('qb_fmt_' + clientId) || null,
+    default_id_text_template: gv('qb_idt_' + clientId) || null,
+    mold: {
+      wall_thickness_mm: gn('qb_wall_' + clientId),
+      floor_thickness_mm: gn('qb_floor_' + clientId),
+      headroom_mm: gn('qb_head_' + clientId),
+      sprue_count: gn('qb_sc_' + clientId),
+      vent_count: gn('qb_vc_' + clientId),
+      peg_count: gn('qb_pc_' + clientId),
+      draft_angle_deg: gn('qb_draft_' + clientId),
+    },
+  };
+  // Strip null-valued sub-keys so we don't store empties.
+  for (var k of Object.keys(payload.mold)) {
+    if (payload.mold[k] === null || isNaN(payload.mold[k])) delete payload.mold[k];
+  }
+  for (var k of Object.keys(payload)) {
+    if (payload[k] === null) delete payload[k];
+  }
+  try {
+    await api('/admin/api/clients/' + encodeURIComponent(clientId) + '/quikbolus-defaults', {
+      method: 'PUT', headers: {'content-type': 'application/json'},
+      body: JSON.stringify(payload),
+    });
+    topMsg('QuikBolus defaults saved.', true);
+    editingQuikbolusFor = null;
+    delete quikbolusCache[clientId];
+    renderClients();
+  } catch (e) { alert('Could not save: ' + e.message); }
 }
 
 function startEdit(locId){ editingLocationId = locId; addingLocationFor = null; renderClients(); }

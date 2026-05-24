@@ -39,10 +39,76 @@ function daysUntil(iso) {
   return Math.round((end - today) / 86400000);
 }
 
+// Self-healing migration: add the QuikBolus per-clinic defaults column
+// if it doesn't exist yet. Silently swallows the "duplicate column"
+// error that fires after the first call.
+async function ensureQuikbolusDefaultsColumn(env) {
+  try {
+    await env.DB.prepare(
+      "ALTER TABLE clients ADD COLUMN default_quikbolus_settings TEXT"
+    ).run();
+  } catch (_) {
+    // Already exists -- ignore.
+  }
+}
+
 export async function handleClientsApi(request, env, url) {
   if (!env.DB) return json({ error: "Database is not connected yet." }, 500);
   const path = url.pathname;
   const method = request.method;
+
+  // ---- GET / PUT /admin/api/clients/<id>/quikbolus-defaults ----
+  // Phase 2.5.5: per-clinic default QuikBolus settings blob.
+  let qm = path.match(/^\/admin\/api\/clients\/([^/]+)\/quikbolus-defaults$/);
+  if (qm) {
+    await ensureQuikbolusDefaultsColumn(env);
+    const cid = qm[1];
+    if (method === "GET") {
+      const row = await env.DB.prepare(
+        "SELECT default_quikbolus_settings FROM clients WHERE id = ?"
+      )
+        .bind(cid)
+        .first();
+      if (!row) return json({ error: "Client not found." }, 404);
+      let parsed = null;
+      try {
+        parsed = row.default_quikbolus_settings
+          ? JSON.parse(row.default_quikbolus_settings)
+          : null;
+      } catch (_) {
+        parsed = null;
+      }
+      return json({ client_id: cid, defaults: parsed || {} });
+    }
+    if (method === "PUT") {
+      const body = await request.json().catch(() => null);
+      if (body === null || typeof body !== "object" || Array.isArray(body)) {
+        return json({ error: "Body must be a JSON object." }, 400);
+      }
+      // Light validation -- keep top-level keys to a known allowlist.
+      const allowed = [
+        "default_printer_id",
+        "default_cast_material",
+        "default_export_format",
+        "default_id_text_template",
+        "mold",
+        "direct_print",
+      ];
+      const clean = {};
+      for (const k of allowed) {
+        if (body[k] !== undefined) clean[k] = body[k];
+      }
+      const res = await env.DB.prepare(
+        "UPDATE clients SET default_quikbolus_settings = ? WHERE id = ?"
+      )
+        .bind(JSON.stringify(clean), cid)
+        .run();
+      if (res && res.meta && res.meta.changes === 0)
+        return json({ error: "Client not found." }, 404);
+      return json({ ok: true, saved: clean });
+    }
+    return json({ error: "Method not allowed." }, 405);
+  }
 
   // ---- GET /admin/api/clients : clients + nested locations + key status ----
   if (path === "/admin/api/clients" && method === "GET") {
