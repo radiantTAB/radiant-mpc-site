@@ -199,6 +199,84 @@ The medical-physics software market has stable, observable characteristics:
 - **First-install friction.** Some hospital IT groups require packaging into SCCM/Intune for distribution. Mitigated by shipping an MSI alongside the EXE installer.
 - **No multi-site rollup.** A consulting group with 5 sites can't see all their data in one place. **This is the gap Phase 3 fills.**
 
+### 5.6 Third-party device integration strategy
+
+Most paying customers already own a daily-QA measurement device — most commonly **Sun Nuclear Daily QA 3**, **PTW DAILY QA**, or **IBA myQA Daily**. Radiant is **not** in the hardware business and should not be. The strategic question is how QuikQA (and adjacent modules like QuikLog) ingest data from devices Radiant did not build and does not control.
+
+There are four possible integration paths, with very different legal, technical, and operational profiles:
+
+| Path | What it is | Verdict |
+|---|---|---|
+| 1. Direct USB protocol | Reverse-engineer the device's wire protocol and talk to it bypassing the vendor's software | **Reject.** DMCA exposure; vendor can break compatibility via firmware update; operationally fragile. |
+| 2. Vendor SDK / API | Officially integrate via a published interface from Sun Nuclear / PTW / IBA | **Not available.** Sun Nuclear in particular has no public SDK for SNC Daily QA. None of the device vendors will OEM-partner with a direct software competitor. |
+| 3. File-based import | Customer exports measurement results from the vendor software (CSV, PDF, XML); QuikQA parses the file | **Recommended.** Legally clean — customer-mediated data portability of customer-owned data. |
+| 4. Local database read | With customer permission, QuikQA reads measurement tables directly from the vendor's local SQL Server (where applicable) | **Acceptable as a secondary path.** Legally fine but technically fragile across vendor version upgrades. |
+
+#### 5.6.1 Recommended approach: file-based import
+
+QuikQA ships parsers for the standard output formats of the three major daily-QA devices:
+
+- Sun Nuclear SNC Machine / SNC Daily QA — CSV and PDF report formats
+- PTW DAILY QA software — XML/CSV export
+- IBA myQA Daily — CSV/PDF export
+
+Customer workflow stays unchanged: they take the measurement on their existing device using the vendor's software, then drop (or auto-import) the result file into QuikQA, which:
+
+1. Parses the file and extracts the relevant metrics (output, energy, flatness, symmetry, etc.).
+2. Performs trend analysis across the daily/monthly/annual record set.
+3. Archives the original source file alongside the parsed data for accreditation surveys.
+4. Generates the QuikQA report and updates the longitudinal record.
+
+This positions Radiant as the **software layer** sitting on top of the customer's existing hardware — not a hardware replacement.
+
+#### 5.6.2 Marketing language matters
+
+Marketing copy for this capability must be carefully worded:
+
+- ✅ "QuikQA accepts daily QA output files from your existing device."
+- ✅ "Compatible with output files exported from SNC Machine, PTW DAILY QA, and myQA Daily."
+- ✅ "Bring your own device — QuikQA adds the trending, archive, and audit layer on top."
+- ❌ "QuikQA integrates with Sun Nuclear products." (implies an unauthorized partnership)
+- ❌ "Direct integration with SNC Daily QA." (implies a technical relationship that doesn't exist)
+- ❌ Any use of vendor logos or product trade dress in marketing materials.
+
+The legal distinction is that file-based import is *customer-mediated data portability* — the customer is moving data they own out of one piece of software they paid for, into another piece of software they paid for. This is well-defended ground. Direct vendor integration claims are not.
+
+#### 5.6.3 Pros — detailed
+
+- **Eliminates hardware switching cost.** Customer keeps their existing daily-QA device investment. Removes the single largest objection to switching software vendors.
+- **Removes Radiant from the hardware competition.** Sun Nuclear, PTW, and IBA are entrenched in hardware; competing them on hardware would be a multi-year, multi-million-dollar fight Radiant cannot win. File-based import sidesteps the fight entirely.
+- **Multi-vendor support broadens the addressable market.** A shop that uses PTW for daily QA can adopt QuikQA on equal terms with a shop that uses SNC. Vendor-neutrality is a competitive differentiator.
+- **Local-only data path.** File parsing happens on the customer's workstation. No cloud, no PHI handling, no integration permission needed from the device vendor. Fits the Phase 2 architecture perfectly.
+- **Trivially legally defensible.** No reverse engineering, no protocol scraping, no DMCA exposure.
+- **Aligns with desktop-first strategy.** Every part of this workflow stays inside the clinic's network.
+
+#### 5.6.4 Cons — detailed
+
+- **Vendor format drift.** Sun Nuclear and PTW can change their export schemas between major versions. Each parser must detect the source-software version and adapt. Build versioned parsers from day one and maintain a regression-test corpus of real export files from each vendor version.
+- **Customer effort to export.** Most vendor software requires the user to actively export a file rather than streaming results in real time. Workflow design must minimize friction (one-click export, drop folder watch, or scheduled scrape of an output directory).
+- **No real-time alerting.** Because data only flows when the customer exports, QuikQA cannot alert on out-of-tolerance measurements at the moment of measurement — only after the file is imported. This is a real workflow limitation versus a hypothetical direct integration; document it openly.
+- **Support burden when parsers break.** When Sun Nuclear ships a new SNC Machine version that changes the CSV layout, Radiant support gets the call, not Sun Nuclear. Budget engineering time for parser maintenance — assume one major vendor format change per vendor per year.
+- **Edge-case files.** Customer custom-configured exports, machine-specific output variations, and unusual locale settings (decimal commas vs periods) will generate parser failures. Build a graceful failure mode that surfaces the raw file alongside an error rather than dropping data silently.
+- **Some vendors actively obstruct.** Some QA software intentionally produces machine-unfriendly PDF reports to make parsing harder. Plan for OCR fallback where required, or focus parser effort on the CSV/XML export paths.
+
+#### 5.6.5 Operational requirements for the parser layer
+
+To make this strategy production-quality, the device-integration code in QuikQA needs:
+
+- **Versioned format detection.** Inspect the file header / metadata to determine source vendor and version before parsing.
+- **A regression-test corpus.** Maintain a folder of real export files from each vendor version. Run all parsers against the full corpus on every QuikQA build.
+- **Graceful unknown-format handling.** When a parser encounters an unrecognized format, surface a clear error with the raw file preserved — never silently fail or drop data.
+- **A community submission path.** Allow customers to submit unrecognized export samples back to Radiant (manually, with their permission) to expand the corpus over time.
+- **Documented compatibility matrix.** Publish a versioned compatibility table: "QuikQA 2.x supports SNC Machine 9.0–11.2, PTW DAILY QA 1.6+, myQA Daily 4.0+." Update this with every Radiant release.
+
+#### 5.6.6 Future evolution
+
+Two adjacent opportunities open up once file-based import is solid:
+
+- **Other Quik modules** (QuikLog, QuikDose, QuikScript) can apply the same pattern to their respective vendor-software ecosystems — TPS log files, in-vivo dosimetry exports, machine performance reports. The architecture scales horizontally across modules.
+- **A "device-agnostic suite" sales narrative** becomes available: "Buy any major QA hardware, run QuikQA on top." This is a defensible long-term positioning Sun Nuclear / PTW / IBA cannot easily replicate without cannibalizing their own software businesses.
+
 ---
 
 ## 6. Phase 3 — Optional cloud storage add-on (6–18 months, demand-driven)
