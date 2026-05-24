@@ -7,7 +7,10 @@ public Git repo for convenience.
 
 | File | Status | Description |
 |---|---|---|
-| `quikbolus-phase-2-spec.md` (+ `.pdf`) | Draft v0.1 | Mold-design workflow + per-printer profile system for QuikBolus |
+| `business-expansion-proposal.md` (+ `.pdf`) | Draft v0.1 | Suite-wide productization, distribution, and storage strategy (covers all app.radiant-mpc.com modules) |
+| `pricing-and-roi-2027.md` (+ `.pdf`) | Draft v0.1 | Recommended pricing structure per module + 3-year revenue / cost / profit projections starting Jan 2027 |
+| `quikbolus-phase-2-spec.md` (+ `.pdf`) | Phases 2.3 + 2.4 **shipped** | Mold-design workflow + per-printer profile system for QuikBolus. Phase 2.5 work tracked in the next entry. |
+| `quikbolus-phase-2-5-spec.md` (+ `.pdf`) | Draft v0.1 | Stepped parting planes, multi-printer 3MF profiles (Orca / Prusa / Cura), per-clinic admin overrides, direct-print printer picker, wall-thickness sampler, undercut clustering, memory optimization |
 
 Each spec is paired: the markdown file is the source of truth; the PDF is a
 rendered, printable companion (built via `C:\demo_videos\users_guides\build_*.py`).
