@@ -179,7 +179,16 @@ async function checkAppAuth(request, env) {
       const client = await sessionClient(request, env);
       if (client) return true;
     } catch (_) {
-      // DB hiccup -- fall through to Access check below.
+      // DB hiccup -- fall through to other checks below.
+    }
+    // Admin session: admins should pass the customer-portal gate too,
+    // for demo / training / "Products Testing" access. Cookie is now
+    // Path=/ (see admin-auth.js sessionCookie).
+    try {
+      const admin = await adminSession(request, env);
+      if (admin) return true;
+    } catch (_) {
+      // ignore -- fall through
     }
   }
 

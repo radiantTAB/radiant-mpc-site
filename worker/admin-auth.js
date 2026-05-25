@@ -144,13 +144,15 @@ export async function adminSession(request, env) {
 }
 
 function sessionCookie(token, maxAgeSeconds) {
-  // Path=/admin keeps the cookie scoped to the admin surface only.
-  // Domain is intentionally omitted -- admin login lives only on
-  // app.radiant-mpc.com, never on customer-facing subdomains.
+  // Path=/ so the cookie accompanies requests to product pages and the
+  // launcher (admin should pass through the customer-portal gate too,
+  // for demo/training access). Domain is intentionally omitted -- admin
+  // login lives only on app.radiant-mpc.com, never on customer-facing
+  // subdomains.
   return (
     "admin_session=" +
     token +
-    "; HttpOnly; Secure; SameSite=Lax; Path=/admin; Max-Age=" +
+    "; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=" +
     maxAgeSeconds
   );
 }
@@ -212,7 +214,15 @@ export async function handleAdminAuth(request, env, url) {
         .bind(token)
         .run();
     }
-    return json({ ok: true }, 200, { "Set-Cookie": sessionCookie("", 0) });
+    // Emit both a Path=/ and a Path=/admin clear so any stale cookie
+    // from the previous narrower-path scheme is also wiped from the browser.
+    const headers = new Headers({ "content-type": "application/json; charset=utf-8" });
+    headers.append("Set-Cookie", sessionCookie("", 0));
+    headers.append(
+      "Set-Cookie",
+      "admin_session=; HttpOnly; Secure; SameSite=Lax; Path=/admin; Max-Age=0"
+    );
+    return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
   }
 
   // ---- GET /admin/api/me ------------------------------------------
