@@ -29,6 +29,9 @@ const HOSTED_APPS = {
   quiklog: "https://quiklog.radiant-mpc.com/",
   quikram: "https://quikram.radiant-mpc.com/",
   quikshare: "https://quikshare.radiant-mpc.com/",
+  quikshield: "https://quikshield.radiant-mpc.com/",
+  quikcare: "https://quikcare.radiant-mpc.com/",
+  quikcalc: "/apps/quikcalc/",
 };
 
 function json(data, status = 200, headers) {
